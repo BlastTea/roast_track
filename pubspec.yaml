@@ -1,7 +1,7 @@
 name: roast_track
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 0.0.1
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
@@ -9,11 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.5
+  m_widget:
+    git:
+      url: https://github.com/BlastTea/MWidget.git
+      ref: 63f3535f21421dad4f8ebc94b7545ed4aa255dd8
 
 dev_dependencies:
+  flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
