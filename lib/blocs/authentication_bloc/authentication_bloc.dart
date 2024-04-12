@@ -45,7 +45,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       while (NavigationHelper.canGoBack()) {
         NavigationHelper.back();
       }
-      NavigationHelper.toReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
+      NavigationHelper.toReplacement(MaterialPageRoute(builder: (context) => const CompanyPage.select()));
 
       _isSiningIn = false;
       _showPasswordSignIn = false;

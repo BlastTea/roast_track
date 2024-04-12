@@ -7,4 +7,21 @@ class OrderInitial extends OrderState {}
 
 class OrderError extends OrderState {}
 
-class OrderDataLoaded extends OrderState {}
+class OrderDataLoaded extends OrderState {
+  OrderDataLoaded({
+    required this.keyList,
+    required this.textControllerOrderName,
+    required this.orders,
+    required this.originalOrder,
+    required this.currentOrder,
+  });
+
+  final GlobalKey<AnimatedListState> keyList;
+
+  final TextEditingController textControllerOrderName;
+
+  final List<Order> orders;
+
+  final Order? originalOrder;
+  final Order? currentOrder;
+}

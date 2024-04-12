@@ -38,6 +38,7 @@ class SignInPage extends StatelessWidget {
                           icon: Icon(stateAuthentication.showPasswordSignIn ? Icons.visibility_off : Icons.visibility),
                         ),
                       ),
+                      obscureText: !stateAuthentication.showPasswordSignIn,
                       autofillHints: const [AutofillHints.password],
                       onEditingComplete: () => MyApp.authenticationBloc.add(SignInPressed()),
                     ),

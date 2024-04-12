@@ -11,4 +11,16 @@ class SetOrderState extends OrderEvent {
 
 class SetOrderToInitial extends OrderEvent {}
 
-class InitializeOrderData extends OrderEvent {}
+class InitializeOrderData extends OrderEvent {
+  InitializeOrderData({this.completer});
+
+  final Completer<bool>? completer;
+}
+
+class EditOrder extends OrderEvent {
+  EditOrder({required this.value});
+
+  final Order value;
+}
+
+class SaveOrderPressed extends OrderEvent {}

@@ -49,13 +49,18 @@ class ApiHelper {
     required Uri uri,
     Map<String, dynamic>? body,
     bool ignoreAuthorization = false,
+    bool includeCompanyId = false,
     bool decode = true,
     Duration? timeout,
   }) async {
     http.Request request = http.Request(method, uri);
     debugPrint('(http request) : $method ${request.url} ${request.headers} $body');
     request.headers.addAll(await _getHeaders(ignoreAuthorization: ignoreAuthorization));
-    if (body != null) request.body = json.encode(body);
+    Map<String, dynamic> effectiveBody = {};
+    if (body != null) effectiveBody.addAll(body);
+    if (includeCompanyId) effectiveBody.addAll({'company_id': currentCompany?.id});
+
+    if (effectiveBody.isNotEmpty) request.body = json.encode(effectiveBody);
 
     http.StreamedResponse response;
     if (timeout == null) {
@@ -128,6 +133,10 @@ class ApiHelper {
 
     await sharedPref.setString(_keyToken, token);
     await sharedPref.setString(_keyCurrentUser, jsonEncode(currentUser!.toJson()));
+
+    Completer<bool> completer = Completer();
+    if (MyApp.companyBloc.state is CompanyInitial) MyApp.companyBloc.add(InitializeCompanyData(completer: completer));
+    await completer.future;
   }
 
   static Future<void> signOut() async {
@@ -141,6 +150,7 @@ class ApiHelper {
 
     sharedPref.remove(_keyToken);
     sharedPref.remove(_keyCurrentUser);
+    sharedPref.remove(keySelectedCompanyId);
 
     currentUser = null;
 
@@ -157,46 +167,26 @@ class ApiHelper {
 
     currentUser = User.fromJson(jsonDecode(sharedPref.getString(_keyCurrentUser)!));
 
+    Completer<bool> completer = Completer();
+    if (MyApp.companyBloc.state is CompanyInitial) MyApp.companyBloc.add(InitializeCompanyData(completer: completer));
+    await completer.future;
+
     return true;
   }
 
-  static Future<dynamic> get(String path, {bool ignoreAuthorization = true}) => _request(method: 'GET', uri: Uri.parse('$url$path'), ignoreAuthorization: ignoreAuthorization);
+  static Future<dynamic> get(String path, {Map<String, dynamic>? body, bool ignoreAuthorization = true, bool includeCompanyId = false}) => _request(method: 'GET', uri: Uri.parse('$url$path'), body: body, ignoreAuthorization: ignoreAuthorization, includeCompanyId: includeCompanyId);
 
   static Future<dynamic> getBytesUri(Uri uri, {Duration? timeout}) => _request(method: 'GET', uri: uri, decode: false, ignoreAuthorization: true, timeout: timeout);
 
-  static Future<dynamic> post(String path, {Map<String, dynamic>? body, bool ignoreAuthorization = false}) => _request(method: 'POST', uri: Uri.parse('$url$path'), body: body, ignoreAuthorization: ignoreAuthorization);
+  static Future<dynamic> post(String path, {Map<String, dynamic>? body, bool ignoreAuthorization = false, bool includeCompanyId = false}) => _request(method: 'POST', uri: Uri.parse('$url$path'), body: body, ignoreAuthorization: ignoreAuthorization, includeCompanyId: includeCompanyId);
 
-  static Future<dynamic> postMultipart(
-    String path, {
-    Map<String, String>? fields,
-    List<http.MultipartFile>? files,
-    Duration? timeout,
-  }) =>
-      _requestMultipart(
-        method: 'POST',
-        uri: Uri.parse('$url$path'),
-        fields: fields,
-        files: files,
-        timeout: timeout,
-      );
+  static Future<dynamic> postMultipart(String path, {Map<String, String>? fields, List<http.MultipartFile>? files, Duration? timeout}) => _requestMultipart(method: 'POST', uri: Uri.parse('$url$path'), fields: fields, files: files, timeout: timeout);
 
-  static Future<dynamic> put(String path, {Map<String, dynamic>? body}) => _request(method: 'PUT', uri: Uri.parse('$url$path'), body: body);
+  static Future<dynamic> put(String path, {Map<String, dynamic>? body, bool ignoreAuthorization = false, bool includeCompanyId = false}) => _request(method: 'PUT', uri: Uri.parse('$url$path'), body: body, ignoreAuthorization: ignoreAuthorization, includeCompanyId: includeCompanyId);
 
-  static Future<dynamic> putMultipart(
-    String path, {
-    Map<String, String>? fields,
-    List<http.MultipartFile>? files,
-    Duration? timeout,
-  }) =>
-      _requestMultipart(
-        method: 'PUT',
-        uri: Uri.parse('$url$path'),
-        fields: fields,
-        files: files,
-        timeout: timeout,
-      );
+  static Future<dynamic> putMultipart(String path, {Map<String, String>? fields, List<http.MultipartFile>? files, Duration? timeout}) => _requestMultipart(method: 'PUT', uri: Uri.parse('$url$path'), fields: fields, files: files, timeout: timeout);
 
-  static Future<dynamic> delete(String path, {Map<String, dynamic>? body}) => _request(method: 'DELETE', uri: Uri.parse('$url$path'), body: body);
+  static Future<dynamic> delete(String path, {Map<String, dynamic>? body, bool ignoreAuthorization = false, bool includeCompanyId = false}) => _request(method: 'DELETE', uri: Uri.parse('$url$path'), body: body, ignoreAuthorization: ignoreAuthorization, includeCompanyId: includeCompanyId);
 
   static Future<void> handleError(Object e) async {
     if (e is String && e == 'Session is expired') {
