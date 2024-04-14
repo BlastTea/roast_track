@@ -12,5 +12,4 @@ import 'package:roast_track/views/pages/pages.dart';
 
 part 'order_fragment.dart';
 part 'report_fragment.dart';
-part 'company_fragment.dart';
 part 'profile_fragment.dart';

@@ -59,6 +59,51 @@ class Order with _$Order {
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 }
 
+@unfreezed
+class Roasting with _$Roasting {
+  factory Roasting({
+    int? id,
+    @JsonKey(name: 'roastery_id') int? roasteryId,
+    @JsonKey(name: 'order_id') int? orderId,
+    UnitType? unit,
+    @JsonKey(name: 'time_elapsed') double? timeElapsed,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+  }) = _Roasting;
+
+  factory Roasting.fromJson(Map<String, dynamic> json) => _$RoastingFromJson(json);
+}
+
+@unfreezed
+class Degree with _$Degree {
+  factory Degree({
+    int? id,
+    @JsonKey(name: 'roasting_id') int? roastingId,
+    DegreeType? type,
+    @JsonKey(name: 'env_temp') double? envTemp,
+    @JsonKey(name: 'bean_temp') double? beanTemp,
+    @JsonKey(name: 'time_elapsed') double? timeElapsed,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+  }) = _Degree;
+
+  factory Degree.fromJson(Map<String, dynamic> json) => _$DegreeFromJson(json);
+}
+
+@unfreezed
+class ClassificationResult with _$ClassificationResult {
+  factory ClassificationResult({
+    int? id,
+    @JsonKey(name: 'roasting_id') int? roastingId,
+    Map<String, dynamic>? result,
+    @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+  }) = _ClassificationResult;
+
+  factory ClassificationResult.fromJson(Map<String, dynamic> json) => _$ClassificationResultFromJson(json);
+}
+
 enum UserRole {
   owner,
   admin,
@@ -74,4 +119,38 @@ enum OrderStatus {
         inProgress => 'Sedang Dikerjakan',
         done => 'Selesai',
       };
+}
+
+enum UnitType {
+  fahrenheit,
+  celcius,
+}
+
+enum DegreeType {
+  charge,
+  @JsonValue('dry_end')
+  dryEnd,
+  @JsonValue('fc_start')
+  fcStart,
+  @JsonValue('fc_end')
+  fcEnd,
+  @JsonValue('sc_start')
+  scStart,
+  drop;
+
+  String get text => switch (this) {
+        charge => 'Charge',
+        dryEnd => 'Dry End',
+        fcStart => 'FC Start',
+        fcEnd => 'FC End',
+        scStart => 'SC Start',
+        drop => 'Drop',
+      };
+}
+
+enum ResultLabelType {
+  green,
+  light,
+  medium,
+  dark,
 }

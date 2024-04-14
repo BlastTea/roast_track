@@ -111,3 +111,104 @@ const _$OrderStatusEnumMap = {
   OrderStatus.inProgress: 'in_progress',
   OrderStatus.done: 'done',
 };
+
+_$RoastingImpl _$$RoastingImplFromJson(Map<String, dynamic> json) =>
+    _$RoastingImpl(
+      id: json['id'] as int?,
+      roasteryId: json['roastery_id'] as int?,
+      orderId: json['order_id'] as int?,
+      unit: $enumDecodeNullable(_$UnitTypeEnumMap, json['unit']),
+      timeElapsed: (json['time_elapsed'] as num?)?.toDouble(),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+    );
+
+Map<String, dynamic> _$$RoastingImplToJson(_$RoastingImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'roastery_id': instance.roasteryId,
+      'order_id': instance.orderId,
+      'unit': _$UnitTypeEnumMap[instance.unit],
+      'time_elapsed': instance.timeElapsed,
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
+    };
+
+const _$UnitTypeEnumMap = {
+  UnitType.fahrenheit: 'fahrenheit',
+  UnitType.celcius: 'celcius',
+};
+
+_$DegreeImpl _$$DegreeImplFromJson(Map<String, dynamic> json) => _$DegreeImpl(
+      id: json['id'] as int?,
+      roastingId: json['roasting_id'] as int?,
+      type: $enumDecodeNullable(_$DegreeTypeEnumMap, json['type']),
+      envTemp: (json['env_temp'] as num?)?.toDouble(),
+      beanTemp: (json['bean_temp'] as num?)?.toDouble(),
+      timeElapsed: (json['time_elapsed'] as num?)?.toDouble(),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+    );
+
+Map<String, dynamic> _$$DegreeImplToJson(_$DegreeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'roasting_id': instance.roastingId,
+      'type': _$DegreeTypeEnumMap[instance.type],
+      'env_temp': instance.envTemp,
+      'bean_temp': instance.beanTemp,
+      'time_elapsed': instance.timeElapsed,
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
+    };
+
+const _$DegreeTypeEnumMap = {
+  DegreeType.charge: 'charge',
+  DegreeType.dryEnd: 'dry_end',
+  DegreeType.fcStart: 'fc_start',
+  DegreeType.fcEnd: 'fc_end',
+  DegreeType.scStart: 'sc_start',
+  DegreeType.drop: 'drop',
+};
+
+_$ClassificationResultImpl _$$ClassificationResultImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ClassificationResultImpl(
+      id: json['id'] as int?,
+      roastingId: json['roasting_id'] as int?,
+      result: json['result'] as Map<String, dynamic>?,
+      resultLabel:
+          $enumDecodeNullable(_$ResultLabelTypeEnumMap, json['result_label']),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+    );
+
+Map<String, dynamic> _$$ClassificationResultImplToJson(
+        _$ClassificationResultImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'roasting_id': instance.roastingId,
+      'result': instance.result,
+      'result_label': _$ResultLabelTypeEnumMap[instance.resultLabel],
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
+    };
+
+const _$ResultLabelTypeEnumMap = {
+  ResultLabelType.green: 'green',
+  ResultLabelType.light: 'light',
+  ResultLabelType.medium: 'medium',
+  ResultLabelType.dark: 'dark',
+};

@@ -20,3 +20,7 @@ part 'order_bloc/order_state.dart';
 part 'company_bloc/company_bloc.dart';
 part 'company_bloc/company_event.dart';
 part 'company_bloc/company_state.dart';
+
+part 'roasting_bloc/roasting_bloc.dart';
+part 'roasting_bloc/roasting_event.dart';
+part 'roasting_bloc/roasting_state.dart';

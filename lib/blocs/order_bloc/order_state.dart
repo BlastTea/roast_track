@@ -10,6 +10,7 @@ class OrderError extends OrderState {}
 class OrderDataLoaded extends OrderState {
   OrderDataLoaded({
     required this.keyList,
+    required this.controllerList,
     required this.textControllerOrderName,
     required this.orders,
     required this.originalOrder,
@@ -17,6 +18,8 @@ class OrderDataLoaded extends OrderState {
   });
 
   final GlobalKey<AnimatedListState> keyList;
+
+  final ScrollController controllerList;
 
   final TextEditingController textControllerOrderName;
 

@@ -23,9 +23,7 @@ class _CompanyPageState extends State<CompanyPage> {
         builder: (context, stateCompany) {
           if (stateCompany is CompanyDataLoaded) {
             return Scaffold(
-              appBar: AppBar(
-                title: Text(widget.isSelect ? 'Pilih Perusahaan' : 'Perusahaan'),
-              ),
+              appBar: _buildAppBar(context: context),
               body: stateCompany.companies.isEmpty
                   ? RetryButton(
                       titleText: 'Tidak ada data',
@@ -53,9 +51,7 @@ class _CompanyPageState extends State<CompanyPage> {
             );
           } else if (stateCompany is CompanyInitial) {
             return Scaffold(
-              appBar: AppBar(
-                title: Text(widget.isSelect ? 'Pilih Perusahaan' : 'Perusahaan'),
-              ),
+              appBar: _buildAppBar(context: context),
               body: ErrorOccuredButton(
                 onRetryPressed: () => MyApp.companyBloc.add(InitializeCompanyData()),
               ),
@@ -63,13 +59,28 @@ class _CompanyPageState extends State<CompanyPage> {
           }
 
           return Scaffold(
-            appBar: AppBar(
-              title: Text(widget.isSelect ? 'Pilih Perusahaan' : 'Perusahaan'),
-            ),
+            appBar: _buildAppBar(context: context),
             body: const Center(
               child: CircularProgressIndicator(),
             ),
           );
         },
+      );
+
+  PreferredSizeWidget _buildAppBar({required BuildContext context}) => AppBar(
+        title: Text(widget.isSelect ? 'Pilih Perusahaan' : 'Perusahaan'),
+        actions: [
+          if (widget.isSelect)
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () async {
+                await ApiHelper.signOut();
+                NavigationHelper.toReplacement(MaterialPageRoute(builder: (context) => const SignInPage()));
+                await Future.delayed(Durations.medium3);
+                homePageKey.currentState?.setSelectedIndex(0);
+              },
+            ),
+          const SizedBox(width: 8.0),
+        ],
       );
 }

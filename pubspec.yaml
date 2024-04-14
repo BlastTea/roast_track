@@ -18,6 +18,8 @@ dependencies:
       url: https://github.com/BlastTea/MWidget.git
       ref: 7bb423875cf7dbded45d23b9de866270f95351b5
   shared_preferences: ^2.2.2
+  syncfusion_flutter_charts: ^25.1.39+1
+  webview_universal: ^0.0.5
 
 dev_dependencies:
   build_runner: ^2.4.9

@@ -36,18 +36,41 @@ class MyApp extends StatelessWidget {
   static AuthenticationBloc authenticationBloc = AuthenticationBloc();
   static OrderBloc orderBloc = OrderBloc();
   static CompanyBloc companyBloc = CompanyBloc();
+  static RoastingBloc roastingBloc = RoastingBloc();
 
   @override
   Widget build(BuildContext context) => MWidgetDynamicColorBuilder(
         builder: (context, theme, darkTheme, themeMode, colorScheme) => MWidgetTheme(
-          dialogTheme: const MWidgetDialogThemeData(
+          dialogTheme: MWidgetDialogThemeData(
             primaryFilledButton: true,
+            onRenderMessage: (context, message) {
+              if (message.contains('404')) {
+                return const SelectableText('URL tidak ditemukan, silahkan update aplikasi');
+              } else if (message.contains('500')) {
+                return const SelectableText('Terjadi error pada server');
+              } else if (message.contains('http')) {
+                return const SelectableText('Gagal terhubung ke server, silahkan periksa koneksi internet Anda');
+              }
+              // else if (message.contains('<!doctype html>') || message.contains('<!DOCTYPE html>')) {
+              //   WebView(controller: WebViewController()..init(context: context, setState: setState, uri: uri))
+
+              //   return SizedBox.fromSize(
+              //     size: Size.square(MediaQuery.sizeOf(context).width - 32.0),
+              //     child: SingleChildScrollView(
+              //       child: Html(data: message),
+              //     ),
+              //   );
+              // }
+
+              return SelectableText(message);
+            },
           ),
           child: MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => authenticationBloc),
               BlocProvider(create: (context) => orderBloc),
               BlocProvider(create: (context) => companyBloc),
+              BlocProvider(create: (context) => roastingBloc),
             ],
             child: MaterialApp(
               theme: theme.copyWith(

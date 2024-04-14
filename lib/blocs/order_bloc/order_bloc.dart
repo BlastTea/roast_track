@@ -76,9 +76,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         } else {
           order = await ApiHelper.put(
             '/api/v1/orders',
-            body: {'name': _textControllerOrderName.text.trim()},
+            body: {
+              'id': _currentOrder.id,
+              'name': _textControllerOrderName.text.trim(),
+            },
             includeCompanyId: true,
-          );
+          ).then((value) => Order.fromJson(value['data']));
         }
       } catch (e) {
         NavigationHelper.back();
@@ -90,7 +93,11 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       NavigationHelper.back();
 
       NavigationHelper.clearSnackBars();
-      NavigationHelper.showSnackBar(const SnackBar(content: Text('Data berhasil ditambah')));
+      if (isAdd) {
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Data berhasil ditambah')));
+      } else {
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Data berhasil diubah')));
+      }
 
       await Future.delayed(Durations.medium3);
 
@@ -100,15 +107,22 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         int index = _orders.indexWhere((element) => element.id == _currentOrder.id);
         _orders[index] = order;
       }
+
+      _textControllerOrderName.clear();
       _originalOrder = Order();
       _currentOrder = Order();
       emit(_orderDataLoaded);
 
-      if (isAdd) DefaultAnimatedListTransition.insertItemList(index: _orders.length - 1, state: _keyList.currentState!);
+      if (isAdd) {
+        await _controllerList.animateTo(_controllerList.position.maxScrollExtent, duration: Durations.medium2, curve: Curves.fastOutSlowIn);
+        DefaultAnimatedListTransition.insertItemList(index: _orders.length - 1, state: _keyList.currentState!);
+      }
     });
   }
 
   GlobalKey<AnimatedListState> _keyList = GlobalKey();
+
+  final ScrollController _controllerList = ScrollController();
 
   final TextEditingController _textControllerOrderName = TextEditingController();
 
@@ -119,6 +133,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   OrderDataLoaded get _orderDataLoaded => OrderDataLoaded(
         keyList: _keyList,
+        controllerList: _controllerList,
         textControllerOrderName: _textControllerOrderName,
         orders: _orders,
         originalOrder: _originalOrder,

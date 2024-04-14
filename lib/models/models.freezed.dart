@@ -996,3 +996,845 @@ abstract class _Order implements Order {
   _$$OrderImplCopyWith<_$OrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+Roasting _$RoastingFromJson(Map<String, dynamic> json) {
+  return _Roasting.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Roasting {
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roastery_id')
+  int? get roasteryId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roastery_id')
+  set roasteryId(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'order_id')
+  int? get orderId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'order_id')
+  set orderId(int? value) => throw _privateConstructorUsedError;
+  UnitType? get unit => throw _privateConstructorUsedError;
+  set unit(UnitType? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_elapsed')
+  double? get timeElapsed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_elapsed')
+  set timeElapsed(double? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RoastingCopyWith<Roasting> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RoastingCopyWith<$Res> {
+  factory $RoastingCopyWith(Roasting value, $Res Function(Roasting) then) =
+      _$RoastingCopyWithImpl<$Res, Roasting>;
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roastery_id') int? roasteryId,
+      @JsonKey(name: 'order_id') int? orderId,
+      UnitType? unit,
+      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class _$RoastingCopyWithImpl<$Res, $Val extends Roasting>
+    implements $RoastingCopyWith<$Res> {
+  _$RoastingCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roasteryId = freezed,
+    Object? orderId = freezed,
+    Object? unit = freezed,
+    Object? timeElapsed = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roasteryId: freezed == roasteryId
+          ? _value.roasteryId
+          : roasteryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      orderId: freezed == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      unit: freezed == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitType?,
+      timeElapsed: freezed == timeElapsed
+          ? _value.timeElapsed
+          : timeElapsed // ignore: cast_nullable_to_non_nullable
+              as double?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$RoastingImplCopyWith<$Res>
+    implements $RoastingCopyWith<$Res> {
+  factory _$$RoastingImplCopyWith(
+          _$RoastingImpl value, $Res Function(_$RoastingImpl) then) =
+      __$$RoastingImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roastery_id') int? roasteryId,
+      @JsonKey(name: 'order_id') int? orderId,
+      UnitType? unit,
+      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class __$$RoastingImplCopyWithImpl<$Res>
+    extends _$RoastingCopyWithImpl<$Res, _$RoastingImpl>
+    implements _$$RoastingImplCopyWith<$Res> {
+  __$$RoastingImplCopyWithImpl(
+      _$RoastingImpl _value, $Res Function(_$RoastingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roasteryId = freezed,
+    Object? orderId = freezed,
+    Object? unit = freezed,
+    Object? timeElapsed = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$RoastingImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roasteryId: freezed == roasteryId
+          ? _value.roasteryId
+          : roasteryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      orderId: freezed == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      unit: freezed == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitType?,
+      timeElapsed: freezed == timeElapsed
+          ? _value.timeElapsed
+          : timeElapsed // ignore: cast_nullable_to_non_nullable
+              as double?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$RoastingImpl implements _Roasting {
+  _$RoastingImpl(
+      {this.id,
+      @JsonKey(name: 'roastery_id') this.roasteryId,
+      @JsonKey(name: 'order_id') this.orderId,
+      this.unit,
+      @JsonKey(name: 'time_elapsed') this.timeElapsed,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt});
+
+  factory _$RoastingImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RoastingImplFromJson(json);
+
+  @override
+  int? id;
+  @override
+  @JsonKey(name: 'roastery_id')
+  int? roasteryId;
+  @override
+  @JsonKey(name: 'order_id')
+  int? orderId;
+  @override
+  UnitType? unit;
+  @override
+  @JsonKey(name: 'time_elapsed')
+  double? timeElapsed;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? updatedAt;
+
+  @override
+  String toString() {
+    return 'Roasting(id: $id, roasteryId: $roasteryId, orderId: $orderId, unit: $unit, timeElapsed: $timeElapsed, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RoastingImplCopyWith<_$RoastingImpl> get copyWith =>
+      __$$RoastingImplCopyWithImpl<_$RoastingImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RoastingImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Roasting implements Roasting {
+  factory _Roasting(
+      {int? id,
+      @JsonKey(name: 'roastery_id') int? roasteryId,
+      @JsonKey(name: 'order_id') int? orderId,
+      UnitType? unit,
+      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt}) = _$RoastingImpl;
+
+  factory _Roasting.fromJson(Map<String, dynamic> json) =
+      _$RoastingImpl.fromJson;
+
+  @override
+  int? get id;
+  set id(int? value);
+  @override
+  @JsonKey(name: 'roastery_id')
+  int? get roasteryId;
+  @JsonKey(name: 'roastery_id')
+  set roasteryId(int? value);
+  @override
+  @JsonKey(name: 'order_id')
+  int? get orderId;
+  @JsonKey(name: 'order_id')
+  set orderId(int? value);
+  @override
+  UnitType? get unit;
+  set unit(UnitType? value);
+  @override
+  @JsonKey(name: 'time_elapsed')
+  double? get timeElapsed;
+  @JsonKey(name: 'time_elapsed')
+  set timeElapsed(double? value);
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value);
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value);
+  @override
+  @JsonKey(ignore: true)
+  _$$RoastingImplCopyWith<_$RoastingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Degree _$DegreeFromJson(Map<String, dynamic> json) {
+  return _Degree.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Degree {
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roasting_id')
+  int? get roastingId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roasting_id')
+  set roastingId(int? value) => throw _privateConstructorUsedError;
+  DegreeType? get type => throw _privateConstructorUsedError;
+  set type(DegreeType? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'env_temp')
+  double? get envTemp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'env_temp')
+  set envTemp(double? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bean_temp')
+  double? get beanTemp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bean_temp')
+  set beanTemp(double? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_elapsed')
+  double? get timeElapsed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_elapsed')
+  set timeElapsed(double? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DegreeCopyWith<Degree> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DegreeCopyWith<$Res> {
+  factory $DegreeCopyWith(Degree value, $Res Function(Degree) then) =
+      _$DegreeCopyWithImpl<$Res, Degree>;
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roasting_id') int? roastingId,
+      DegreeType? type,
+      @JsonKey(name: 'env_temp') double? envTemp,
+      @JsonKey(name: 'bean_temp') double? beanTemp,
+      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class _$DegreeCopyWithImpl<$Res, $Val extends Degree>
+    implements $DegreeCopyWith<$Res> {
+  _$DegreeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roastingId = freezed,
+    Object? type = freezed,
+    Object? envTemp = freezed,
+    Object? beanTemp = freezed,
+    Object? timeElapsed = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roastingId: freezed == roastingId
+          ? _value.roastingId
+          : roastingId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as DegreeType?,
+      envTemp: freezed == envTemp
+          ? _value.envTemp
+          : envTemp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      beanTemp: freezed == beanTemp
+          ? _value.beanTemp
+          : beanTemp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      timeElapsed: freezed == timeElapsed
+          ? _value.timeElapsed
+          : timeElapsed // ignore: cast_nullable_to_non_nullable
+              as double?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DegreeImplCopyWith<$Res> implements $DegreeCopyWith<$Res> {
+  factory _$$DegreeImplCopyWith(
+          _$DegreeImpl value, $Res Function(_$DegreeImpl) then) =
+      __$$DegreeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roasting_id') int? roastingId,
+      DegreeType? type,
+      @JsonKey(name: 'env_temp') double? envTemp,
+      @JsonKey(name: 'bean_temp') double? beanTemp,
+      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class __$$DegreeImplCopyWithImpl<$Res>
+    extends _$DegreeCopyWithImpl<$Res, _$DegreeImpl>
+    implements _$$DegreeImplCopyWith<$Res> {
+  __$$DegreeImplCopyWithImpl(
+      _$DegreeImpl _value, $Res Function(_$DegreeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roastingId = freezed,
+    Object? type = freezed,
+    Object? envTemp = freezed,
+    Object? beanTemp = freezed,
+    Object? timeElapsed = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$DegreeImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roastingId: freezed == roastingId
+          ? _value.roastingId
+          : roastingId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as DegreeType?,
+      envTemp: freezed == envTemp
+          ? _value.envTemp
+          : envTemp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      beanTemp: freezed == beanTemp
+          ? _value.beanTemp
+          : beanTemp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      timeElapsed: freezed == timeElapsed
+          ? _value.timeElapsed
+          : timeElapsed // ignore: cast_nullable_to_non_nullable
+              as double?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DegreeImpl implements _Degree {
+  _$DegreeImpl(
+      {this.id,
+      @JsonKey(name: 'roasting_id') this.roastingId,
+      this.type,
+      @JsonKey(name: 'env_temp') this.envTemp,
+      @JsonKey(name: 'bean_temp') this.beanTemp,
+      @JsonKey(name: 'time_elapsed') this.timeElapsed,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt});
+
+  factory _$DegreeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DegreeImplFromJson(json);
+
+  @override
+  int? id;
+  @override
+  @JsonKey(name: 'roasting_id')
+  int? roastingId;
+  @override
+  DegreeType? type;
+  @override
+  @JsonKey(name: 'env_temp')
+  double? envTemp;
+  @override
+  @JsonKey(name: 'bean_temp')
+  double? beanTemp;
+  @override
+  @JsonKey(name: 'time_elapsed')
+  double? timeElapsed;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? updatedAt;
+
+  @override
+  String toString() {
+    return 'Degree(id: $id, roastingId: $roastingId, type: $type, envTemp: $envTemp, beanTemp: $beanTemp, timeElapsed: $timeElapsed, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DegreeImplCopyWith<_$DegreeImpl> get copyWith =>
+      __$$DegreeImplCopyWithImpl<_$DegreeImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DegreeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Degree implements Degree {
+  factory _Degree(
+      {int? id,
+      @JsonKey(name: 'roasting_id') int? roastingId,
+      DegreeType? type,
+      @JsonKey(name: 'env_temp') double? envTemp,
+      @JsonKey(name: 'bean_temp') double? beanTemp,
+      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt}) = _$DegreeImpl;
+
+  factory _Degree.fromJson(Map<String, dynamic> json) = _$DegreeImpl.fromJson;
+
+  @override
+  int? get id;
+  set id(int? value);
+  @override
+  @JsonKey(name: 'roasting_id')
+  int? get roastingId;
+  @JsonKey(name: 'roasting_id')
+  set roastingId(int? value);
+  @override
+  DegreeType? get type;
+  set type(DegreeType? value);
+  @override
+  @JsonKey(name: 'env_temp')
+  double? get envTemp;
+  @JsonKey(name: 'env_temp')
+  set envTemp(double? value);
+  @override
+  @JsonKey(name: 'bean_temp')
+  double? get beanTemp;
+  @JsonKey(name: 'bean_temp')
+  set beanTemp(double? value);
+  @override
+  @JsonKey(name: 'time_elapsed')
+  double? get timeElapsed;
+  @JsonKey(name: 'time_elapsed')
+  set timeElapsed(double? value);
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value);
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value);
+  @override
+  @JsonKey(ignore: true)
+  _$$DegreeImplCopyWith<_$DegreeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ClassificationResult _$ClassificationResultFromJson(Map<String, dynamic> json) {
+  return _ClassificationResult.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClassificationResult {
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roasting_id')
+  int? get roastingId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roasting_id')
+  set roastingId(int? value) => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get result => throw _privateConstructorUsedError;
+  set result(Map<String, dynamic>? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'result_label')
+  ResultLabelType? get resultLabel => throw _privateConstructorUsedError;
+  @JsonKey(name: 'result_label')
+  set resultLabel(ResultLabelType? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClassificationResultCopyWith<ClassificationResult> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClassificationResultCopyWith<$Res> {
+  factory $ClassificationResultCopyWith(ClassificationResult value,
+          $Res Function(ClassificationResult) then) =
+      _$ClassificationResultCopyWithImpl<$Res, ClassificationResult>;
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roasting_id') int? roastingId,
+      Map<String, dynamic>? result,
+      @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class _$ClassificationResultCopyWithImpl<$Res,
+        $Val extends ClassificationResult>
+    implements $ClassificationResultCopyWith<$Res> {
+  _$ClassificationResultCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roastingId = freezed,
+    Object? result = freezed,
+    Object? resultLabel = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roastingId: freezed == roastingId
+          ? _value.roastingId
+          : roastingId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      result: freezed == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      resultLabel: freezed == resultLabel
+          ? _value.resultLabel
+          : resultLabel // ignore: cast_nullable_to_non_nullable
+              as ResultLabelType?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClassificationResultImplCopyWith<$Res>
+    implements $ClassificationResultCopyWith<$Res> {
+  factory _$$ClassificationResultImplCopyWith(_$ClassificationResultImpl value,
+          $Res Function(_$ClassificationResultImpl) then) =
+      __$$ClassificationResultImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roasting_id') int? roastingId,
+      Map<String, dynamic>? result,
+      @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class __$$ClassificationResultImplCopyWithImpl<$Res>
+    extends _$ClassificationResultCopyWithImpl<$Res, _$ClassificationResultImpl>
+    implements _$$ClassificationResultImplCopyWith<$Res> {
+  __$$ClassificationResultImplCopyWithImpl(_$ClassificationResultImpl _value,
+      $Res Function(_$ClassificationResultImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roastingId = freezed,
+    Object? result = freezed,
+    Object? resultLabel = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$ClassificationResultImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roastingId: freezed == roastingId
+          ? _value.roastingId
+          : roastingId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      result: freezed == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      resultLabel: freezed == resultLabel
+          ? _value.resultLabel
+          : resultLabel // ignore: cast_nullable_to_non_nullable
+              as ResultLabelType?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClassificationResultImpl implements _ClassificationResult {
+  _$ClassificationResultImpl(
+      {this.id,
+      @JsonKey(name: 'roasting_id') this.roastingId,
+      this.result,
+      @JsonKey(name: 'result_label') this.resultLabel,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt});
+
+  factory _$ClassificationResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClassificationResultImplFromJson(json);
+
+  @override
+  int? id;
+  @override
+  @JsonKey(name: 'roasting_id')
+  int? roastingId;
+  @override
+  Map<String, dynamic>? result;
+  @override
+  @JsonKey(name: 'result_label')
+  ResultLabelType? resultLabel;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? updatedAt;
+
+  @override
+  String toString() {
+    return 'ClassificationResult(id: $id, roastingId: $roastingId, result: $result, resultLabel: $resultLabel, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClassificationResultImplCopyWith<_$ClassificationResultImpl>
+      get copyWith =>
+          __$$ClassificationResultImplCopyWithImpl<_$ClassificationResultImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClassificationResultImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClassificationResult implements ClassificationResult {
+  factory _ClassificationResult(
+          {int? id,
+          @JsonKey(name: 'roasting_id') int? roastingId,
+          Map<String, dynamic>? result,
+          @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+          @JsonKey(name: 'created_at') DateTime? createdAt,
+          @JsonKey(name: 'updated_at') DateTime? updatedAt}) =
+      _$ClassificationResultImpl;
+
+  factory _ClassificationResult.fromJson(Map<String, dynamic> json) =
+      _$ClassificationResultImpl.fromJson;
+
+  @override
+  int? get id;
+  set id(int? value);
+  @override
+  @JsonKey(name: 'roasting_id')
+  int? get roastingId;
+  @JsonKey(name: 'roasting_id')
+  set roastingId(int? value);
+  @override
+  Map<String, dynamic>? get result;
+  set result(Map<String, dynamic>? value);
+  @override
+  @JsonKey(name: 'result_label')
+  ResultLabelType? get resultLabel;
+  @JsonKey(name: 'result_label')
+  set resultLabel(ResultLabelType? value);
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value);
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value);
+  @override
+  @JsonKey(ignore: true)
+  _$$ClassificationResultImplCopyWith<_$ClassificationResultImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

@@ -21,15 +21,13 @@ class _AddEditOrderPageState extends State<AddEditOrderPage> {
   @override
   void initState() {
     super.initState();
-    if (!widget.isAdd) MyApp.orderBloc.add(EditOrder(value: widget.order!));
+    MyApp.orderBloc.add(EditOrder(value: widget.order ?? Order()));
   }
 
   @override
   Widget build(BuildContext context) => BlocBuilder<OrderBloc, OrderState>(
         builder: (context, stateOrder) {
           if (stateOrder is OrderDataLoaded) {
-            if (kDebugMode && widget.isAdd) stateOrder.textControllerOrderName.text = 'Test';
-
             return Scaffold(
               appBar: AppBar(
                 title: Text(widget.isAdd ? 'Tambah Pesanan' : 'Edit Pesanan'),

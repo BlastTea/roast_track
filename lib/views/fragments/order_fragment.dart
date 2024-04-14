@@ -15,12 +15,15 @@ class OrderFragment extends StatelessWidget {
             ListTile(
               title: Text(order.name ?? '?'),
               subtitle: Text(order.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'),
-              trailing: [UserRole.owner, UserRole.admin].any((element) => element == currentUser?.role)
-                  ? IconButton.outlined(
-                      onPressed: () {},
-                      icon: const Icon(Icons.insights),
-                    )
-                  : null,
+              trailing: IconButton.outlined(
+                onPressed: () => NavigationHelper.to(
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => const RoastingPage(),
+                  ),
+                ),
+                icon: const Icon(Icons.play_arrow_rounded),
+              ),
               onTap: () => NavigationHelper.to(MaterialPageRoute(builder: (context) => AddEditOrderPage.edit(order: order))),
             ),
             const Divider(),
@@ -59,8 +62,9 @@ class OrderFragment extends StatelessWidget {
                         await completer.future;
                       },
                       child: AnimatedList(
-                        padding: const EdgeInsets.only(top: 16.0, bottom: kBottomFabPadding),
                         key: stateOrder.keyList,
+                        controller: stateOrder.controllerList,
+                        padding: const EdgeInsets.only(top: 16.0, bottom: kBottomFabPadding),
                         itemBuilder: (context, index, animation) => listItem(context: context, order: stateOrder.orders[index], animation: animation),
                         initialItemCount: stateOrder.orders.length,
                       ),
