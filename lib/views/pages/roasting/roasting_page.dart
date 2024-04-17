@@ -14,6 +14,14 @@ class _RoastingPageState extends State<RoastingPage> with SingleTickerProviderSt
     MyApp.roastingBloc.add(InitializeRoastingData(animationController: AnimationController(vsync: this, duration: Durations.medium2)));
   }
 
+  ButtonStyle? _getEffectiveButtonStyle({required int index, required DegreeType? type}) => index >= (type?.value ?? 99)
+      ? null
+      : FilledButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
+          foregroundColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.38),
+          elevation: 0,
+        );
+
   @override
   Widget build(BuildContext context) => BlocBuilder<RoastingBloc, RoastingState>(
         builder: (context, stateRoasting) {
@@ -21,13 +29,37 @@ class _RoastingPageState extends State<RoastingPage> with SingleTickerProviderSt
             return Scaffold(
               appBar: AppBar(
                 actions: [
-                  IconButton.filledTonal(
-                    onPressed: () => MyApp.roastingBloc.add(ToggleRoastingTimer()),
-                    icon: AnimatedIcon(
-                      icon: AnimatedIcons.play_pause,
-                      progress: Tween<double>(begin: 0.0, end: 1.0).animate(stateRoasting.animationController!),
+                  AnimatedSwitcher(
+                    duration: Durations.medium2,
+                    transitionBuilder: (child, animation) => FadeTransition(
+                      opacity: animation,
+                      child: ScaleTransition(
+                        scale: animation,
+                        child: RotationTransition(
+                          turns: animation,
+                          child: FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          ),
+                        ),
+                      ),
+                    ),
+                    child: IconButton.filledTonal(
+                      key: ValueKey(stateRoasting.stopwatch.isRunning),
+                      onPressed: () => MyApp.roastingBloc.add(ToggleRoastingTimer()),
+                      icon: Icon(stateRoasting.stopwatch.isRunning ? Icons.stop : Icons.play_arrow),
                     ),
                   ),
+
+                  // IconButton.filledTonal(
+                  //   onPressed: () => MyApp.roastingBloc.add(ToggleRoastingTimer()),
+                  //   icon: ,
+
+                  //   // AnimatedIcon(
+                  //   //   icon: AnimatedIcons.play_pause,
+                  //   //   progress: Tween<double>(begin: 0.0, end: 1.0).animate(stateRoasting.animationController!),
+                  //   // ),
+                  // ),
                   const SizedBox(width: 8.0),
                   Text(
                     '${stateRoasting.timeElapsed.inMinutes.toString().padLeft(2, '0')}:${(stateRoasting.timeElapsed.inSeconds - 60 * stateRoasting.timeElapsed.inMinutes).toString().padLeft(2, '0')}',
@@ -51,7 +83,12 @@ class _RoastingPageState extends State<RoastingPage> with SingleTickerProviderSt
                                 children: [
                                   Expanded(
                                     child: TextField(
-                                      controller: TextEditingController(text: '0.0'),
+                                      controller: TextEditingController(
+                                          text: [
+                                        '${stateRoasting.degrees.isEmpty ? '0.0' : stateRoasting.degrees.last.envTemp ?? '0.0'}',
+                                        '${stateRoasting.degrees.isEmpty ? '0.0' : stateRoasting.degrees.last.beanTemp ?? '0.0'}',
+                                        '0.0',
+                                      ][index]),
                                       decoration: InputDecoration(
                                         labelText: [
                                           'ET',
@@ -73,7 +110,7 @@ class _RoastingPageState extends State<RoastingPage> with SingleTickerProviderSt
                     ),
                     Expanded(
                       child: RoastingChart(
-                        degreeData: [],
+                        degreeData: stateRoasting.degrees,
                         duration: stateRoasting.timeElapsed,
                       ),
                     ),
@@ -97,6 +134,7 @@ class _RoastingPageState extends State<RoastingPage> with SingleTickerProviderSt
                                             .map(
                                               (e) => FilledButton.tonal(
                                                 onPressed: () => MyApp.roastingBloc.add(RoastingButtonPressed(type: e)),
+                                                style: _getEffectiveButtonStyle(index: index, type: stateRoasting.lastDegree),
                                                 child: Text(e.text),
                                               ),
                                             )
@@ -125,6 +163,7 @@ class _RoastingPageState extends State<RoastingPage> with SingleTickerProviderSt
                                               .map(
                                                 (e) => FilledButton.tonal(
                                                   onPressed: () => MyApp.roastingBloc.add(RoastingButtonPressed(type: e)),
+                                                  style: _getEffectiveButtonStyle(index: index + 3, type: stateRoasting.lastDegree),
                                                   child: Text(e.text),
                                                 ),
                                               )

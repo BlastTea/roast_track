@@ -11,5 +11,11 @@ import 'package:roast_track/utils/utils.dart';
 import 'package:roast_track/views/pages/pages.dart';
 
 part 'order_fragment.dart';
-part 'report_fragment.dart';
 part 'profile_fragment.dart';
+
+part 'roastery/home_roastery_fragment.dart';
+part 'roastery/roasting_roastery_fragment.dart';
+part 'roastery/classification_roastery_fragment.dart';
+
+part 'admin/home_admin_fragment.dart';
+part 'admin/roastery_admin_fragment.dart';

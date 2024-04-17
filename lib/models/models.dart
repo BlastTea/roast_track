@@ -127,16 +127,19 @@ enum UnitType {
 }
 
 enum DegreeType {
-  charge,
+  charge(0),
   @JsonValue('dry_end')
-  dryEnd,
+  dryEnd(1),
   @JsonValue('fc_start')
-  fcStart,
+  fcStart(2),
   @JsonValue('fc_end')
-  fcEnd,
+  fcEnd(3),
   @JsonValue('sc_start')
-  scStart,
-  drop;
+  scStart(4),
+  drop(5);
+
+  const DegreeType(this.value);
+  final int value;
 
   String get text => switch (this) {
         charge => 'Charge',
@@ -145,6 +148,16 @@ enum DegreeType {
         fcEnd => 'FC End',
         scStart => 'SC Start',
         drop => 'Drop',
+      };
+
+  static DegreeType? fromValue(int? value) => switch (value) {
+        0 => charge,
+        1 => dryEnd,
+        2 => fcStart,
+        3 => fcEnd,
+        4 => scStart,
+        5 => drop,
+        _ => null,
       };
 }
 

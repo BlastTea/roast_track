@@ -15,27 +15,31 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: [
-          const OrderFragment(),
-          const ReportFragment(),
+          currentUser?.role == UserRole.admin ? const HomeAdminFragment() : const HomeRoasteryFragment(),
+          currentUser?.role == UserRole.admin ? const OrderFragment() : const ClassificationRoasteryFragment(),
+          currentUser?.role == UserRole.admin ? const RoasteryAdminFragment() : const RoastingRoasteryFragment(),
           const ProfileFragment(),
         ][_selectedIndex],
         bottomNavigationBar: NavigationBar(
           destinations: List.generate(
-            3,
+            4,
             (index) => NavigationDestination(
               icon: [
+                const Icon(Icons.home_outlined),
                 const Icon(Icons.receipt_long_outlined),
-                const Icon(Icons.assessment_outlined),
+                const Icon(Icons.groups),
                 const Icon(Icons.account_circle_outlined),
               ][index],
               selectedIcon: [
+                const Icon(Icons.home),
                 const Icon(Icons.receipt_long),
-                const Icon(Icons.assessment),
+                currentUser?.role == UserRole.admin ? const Icon(Icons.groups) : const Icon(Icons.calendar_today),
                 const Icon(Icons.account_circle),
               ][index],
               label: [
-                'Pesanan',
-                'Laporan',
+                'Beranda',
+                currentUser?.role == UserRole.admin ? 'Pesanan' : 'Klasifikasi',
+                currentUser?.role == UserRole.admin ? 'Roastery' : 'Roasting',
                 'Profil',
               ][index],
             ),
