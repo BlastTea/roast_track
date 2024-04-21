@@ -14,8 +14,8 @@ part 'order_fragment.dart';
 part 'profile_fragment.dart';
 
 part 'roastery/home_roastery_fragment.dart';
-part 'roastery/roasting_roastery_fragment.dart';
 part 'roastery/classification_roastery_fragment.dart';
+part 'roastery/result_roastery_fragment.dart';
 
 part 'admin/home_admin_fragment.dart';
 part 'admin/roastery_admin_fragment.dart';

@@ -11,7 +11,11 @@ class OrderDataLoaded extends OrderState {
   OrderDataLoaded({
     required this.keyList,
     required this.controllerList,
-    required this.textControllerOrderName,
+    required this.textControllerOrderersName,
+    required this.textControllerAddress,
+    required this.textControllerFromDistrict,
+    required this.textControllerAmount,
+    required this.textControllerTotal,
     required this.orders,
     required this.originalOrder,
     required this.currentOrder,
@@ -21,7 +25,11 @@ class OrderDataLoaded extends OrderState {
 
   final ScrollController controllerList;
 
-  final TextEditingController textControllerOrderName;
+  final TextEditingController textControllerOrderersName;
+  final TextEditingController textControllerAddress;
+  final TextEditingController textControllerFromDistrict;
+  final TextEditingControllerThousandFormat textControllerAmount;
+  final TextEditingControllerThousandFormat textControllerTotal;
 
   final List<Order> orders;
 

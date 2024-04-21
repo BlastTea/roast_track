@@ -12,8 +12,8 @@ class SignInPage extends StatelessWidget {
             // stateAuthentication.textControllerUsernameSignIn.text = 'Admin';
             // stateAuthentication.textControllerPasswordSignIn.text = 'Admin@123';
 
-            stateAuthentication.textControllerUsernameSignIn.text = 'Roastery';
-            stateAuthentication.textControllerPasswordSignIn.text = 'Roastery@123';
+            // stateAuthentication.textControllerUsernameSignIn.text = 'Roastery';
+            // stateAuthentication.textControllerPasswordSignIn.text = 'Roastery@123';
           }
 
           return Scaffold(
@@ -29,6 +29,7 @@ class SignInPage extends StatelessWidget {
                         labelText: 'Username',
                       ),
                       autofillHints: const [AutofillHints.username],
+                      readOnly: stateAuthentication.isSiningIn,
                       textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 16.0),
@@ -43,18 +44,17 @@ class SignInPage extends StatelessWidget {
                       ),
                       obscureText: !stateAuthentication.showPasswordSignIn,
                       autofillHints: const [AutofillHints.password],
+                      readOnly: stateAuthentication.isSiningIn,
                       onEditingComplete: () => MyApp.authenticationBloc.add(SignInPressed()),
                     ),
                     const SizedBox(height: 16.0),
                     FilledButton(
-                      onPressed: () => MyApp.authenticationBloc.add(SignInPressed()),
+                      onPressed: stateAuthentication.isSiningIn ? null : () => MyApp.authenticationBloc.add(SignInPressed()),
                       child: stateAuthentication.isSiningIn
-                          ? SizedBox(
+                          ? const SizedBox(
                               width: 24.0,
                               height: 24.0,
-                              child: CircularProgressIndicator(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
+                              child: CircularProgressIndicator(),
                             )
                           : const Text('Sign In'),
                     )

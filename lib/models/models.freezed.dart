@@ -24,6 +24,8 @@ mixin _$User {
   set id(int? value) => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   set username(String? value) => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  set email(String? value) => throw _privateConstructorUsedError;
   UserRole? get role => throw _privateConstructorUsedError;
   set role(UserRole? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
@@ -48,6 +50,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {int? id,
       String? username,
+      String? email,
       UserRole? role,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
@@ -68,6 +71,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = freezed,
     Object? username = freezed,
+    Object? email = freezed,
     Object? role = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -80,6 +84,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -107,6 +115,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {int? id,
       String? username,
+      String? email,
       UserRole? role,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
@@ -124,6 +133,7 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? username = freezed,
+    Object? email = freezed,
     Object? role = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -136,6 +146,10 @@ class __$$UserImplCopyWithImpl<$Res>
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -159,6 +173,7 @@ class _$UserImpl implements _User {
   _$UserImpl(
       {this.id,
       this.username,
+      this.email,
       this.role,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
@@ -171,6 +186,8 @@ class _$UserImpl implements _User {
   @override
   String? username;
   @override
+  String? email;
+  @override
   UserRole? role;
   @override
   @JsonKey(name: 'created_at')
@@ -181,7 +198,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, role: $role, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, username: $username, email: $email, role: $role, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @JsonKey(ignore: true)
@@ -202,6 +219,7 @@ abstract class _User implements User {
   factory _User(
       {int? id,
       String? username,
+      String? email,
       UserRole? role,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt}) = _$UserImpl;
@@ -214,6 +232,9 @@ abstract class _User implements User {
   @override
   String? get username;
   set username(String? value);
+  @override
+  String? get email;
+  set email(String? value);
   @override
   UserRole? get role;
   set role(UserRole? value);
@@ -741,8 +762,24 @@ mixin _$Order {
   int? get companyId => throw _privateConstructorUsedError;
   @JsonKey(name: 'company_id')
   set companyId(int? value) => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  set name(String? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'orderers_name')
+  String? get orderersName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'orderers_name')
+  set orderersName(String? value) => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  set address(String? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bean_type')
+  BeanType? get beanType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bean_type')
+  set beanType(BeanType? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'from_district')
+  String? get fromDistrict => throw _privateConstructorUsedError;
+  @JsonKey(name: 'from_district')
+  set fromDistrict(String? value) => throw _privateConstructorUsedError;
+  int? get amount => throw _privateConstructorUsedError;
+  set amount(int? value) => throw _privateConstructorUsedError;
+  double? get total => throw _privateConstructorUsedError;
+  set total(double? value) => throw _privateConstructorUsedError;
   OrderStatus? get status => throw _privateConstructorUsedError;
   set status(OrderStatus? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
@@ -768,7 +805,12 @@ abstract class $OrderCopyWith<$Res> {
       {int? id,
       @JsonKey(name: 'admin_id') int? adminId,
       @JsonKey(name: 'company_id') int? companyId,
-      String? name,
+      @JsonKey(name: 'orderers_name') String? orderersName,
+      String? address,
+      @JsonKey(name: 'bean_type') BeanType? beanType,
+      @JsonKey(name: 'from_district') String? fromDistrict,
+      int? amount,
+      double? total,
       OrderStatus? status,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
@@ -790,7 +832,12 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? id = freezed,
     Object? adminId = freezed,
     Object? companyId = freezed,
-    Object? name = freezed,
+    Object? orderersName = freezed,
+    Object? address = freezed,
+    Object? beanType = freezed,
+    Object? fromDistrict = freezed,
+    Object? amount = freezed,
+    Object? total = freezed,
     Object? status = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -808,10 +855,30 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      orderersName: freezed == orderersName
+          ? _value.orderersName
+          : orderersName // ignore: cast_nullable_to_non_nullable
               as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      beanType: freezed == beanType
+          ? _value.beanType
+          : beanType // ignore: cast_nullable_to_non_nullable
+              as BeanType?,
+      fromDistrict: freezed == fromDistrict
+          ? _value.fromDistrict
+          : fromDistrict // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      total: freezed == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as double?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -839,7 +906,12 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       {int? id,
       @JsonKey(name: 'admin_id') int? adminId,
       @JsonKey(name: 'company_id') int? companyId,
-      String? name,
+      @JsonKey(name: 'orderers_name') String? orderersName,
+      String? address,
+      @JsonKey(name: 'bean_type') BeanType? beanType,
+      @JsonKey(name: 'from_district') String? fromDistrict,
+      int? amount,
+      double? total,
       OrderStatus? status,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
@@ -859,7 +931,12 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? adminId = freezed,
     Object? companyId = freezed,
-    Object? name = freezed,
+    Object? orderersName = freezed,
+    Object? address = freezed,
+    Object? beanType = freezed,
+    Object? fromDistrict = freezed,
+    Object? amount = freezed,
+    Object? total = freezed,
     Object? status = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -877,10 +954,30 @@ class __$$OrderImplCopyWithImpl<$Res>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      orderersName: freezed == orderersName
+          ? _value.orderersName
+          : orderersName // ignore: cast_nullable_to_non_nullable
               as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      beanType: freezed == beanType
+          ? _value.beanType
+          : beanType // ignore: cast_nullable_to_non_nullable
+              as BeanType?,
+      fromDistrict: freezed == fromDistrict
+          ? _value.fromDistrict
+          : fromDistrict // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amount: freezed == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      total: freezed == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as double?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -904,8 +1001,13 @@ class _$OrderImpl implements _Order {
       {this.id,
       @JsonKey(name: 'admin_id') this.adminId,
       @JsonKey(name: 'company_id') this.companyId,
-      this.name,
-      this.status,
+      @JsonKey(name: 'orderers_name') this.orderersName,
+      this.address,
+      @JsonKey(name: 'bean_type') this.beanType,
+      @JsonKey(name: 'from_district') this.fromDistrict,
+      this.amount,
+      this.total,
+      this.status = OrderStatus.inProgress,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
@@ -921,8 +1023,22 @@ class _$OrderImpl implements _Order {
   @JsonKey(name: 'company_id')
   int? companyId;
   @override
-  String? name;
+  @JsonKey(name: 'orderers_name')
+  String? orderersName;
   @override
+  String? address;
+  @override
+  @JsonKey(name: 'bean_type')
+  BeanType? beanType;
+  @override
+  @JsonKey(name: 'from_district')
+  String? fromDistrict;
+  @override
+  int? amount;
+  @override
+  double? total;
+  @override
+  @JsonKey()
   OrderStatus? status;
   @override
   @JsonKey(name: 'created_at')
@@ -933,7 +1049,7 @@ class _$OrderImpl implements _Order {
 
   @override
   String toString() {
-    return 'Order(id: $id, adminId: $adminId, companyId: $companyId, name: $name, status: $status, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Order(id: $id, adminId: $adminId, companyId: $companyId, orderersName: $orderersName, address: $address, beanType: $beanType, fromDistrict: $fromDistrict, amount: $amount, total: $total, status: $status, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @JsonKey(ignore: true)
@@ -955,7 +1071,12 @@ abstract class _Order implements Order {
       {int? id,
       @JsonKey(name: 'admin_id') int? adminId,
       @JsonKey(name: 'company_id') int? companyId,
-      String? name,
+      @JsonKey(name: 'orderers_name') String? orderersName,
+      String? address,
+      @JsonKey(name: 'bean_type') BeanType? beanType,
+      @JsonKey(name: 'from_district') String? fromDistrict,
+      int? amount,
+      double? total,
       OrderStatus? status,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt}) = _$OrderImpl;
@@ -976,8 +1097,29 @@ abstract class _Order implements Order {
   @JsonKey(name: 'company_id')
   set companyId(int? value);
   @override
-  String? get name;
-  set name(String? value);
+  @JsonKey(name: 'orderers_name')
+  String? get orderersName;
+  @JsonKey(name: 'orderers_name')
+  set orderersName(String? value);
+  @override
+  String? get address;
+  set address(String? value);
+  @override
+  @JsonKey(name: 'bean_type')
+  BeanType? get beanType;
+  @JsonKey(name: 'bean_type')
+  set beanType(BeanType? value);
+  @override
+  @JsonKey(name: 'from_district')
+  String? get fromDistrict;
+  @JsonKey(name: 'from_district')
+  set fromDistrict(String? value);
+  @override
+  int? get amount;
+  set amount(int? value);
+  @override
+  double? get total;
+  set total(double? value);
   @override
   OrderStatus? get status;
   set status(OrderStatus? value);
@@ -995,6 +1137,275 @@ abstract class _Order implements Order {
   @JsonKey(ignore: true)
   _$$OrderImplCopyWith<_$OrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+ClassificationRoastingResult _$ClassificationRoastingResultFromJson(
+    Map<String, dynamic> json) {
+  return _ClassificationRoastingResult.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClassificationRoastingResult {
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roasting_id')
+  int? get roastingId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roasting_id')
+  set roastingId(int? value) => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get result => throw _privateConstructorUsedError;
+  set result(Map<String, dynamic>? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'result_label')
+  ResultLabelType? get resultLabel => throw _privateConstructorUsedError;
+  @JsonKey(name: 'result_label')
+  set resultLabel(ResultLabelType? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClassificationRoastingResultCopyWith<ClassificationRoastingResult>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClassificationRoastingResultCopyWith<$Res> {
+  factory $ClassificationRoastingResultCopyWith(
+          ClassificationRoastingResult value,
+          $Res Function(ClassificationRoastingResult) then) =
+      _$ClassificationRoastingResultCopyWithImpl<$Res,
+          ClassificationRoastingResult>;
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roasting_id') int? roastingId,
+      Map<String, dynamic>? result,
+      @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class _$ClassificationRoastingResultCopyWithImpl<$Res,
+        $Val extends ClassificationRoastingResult>
+    implements $ClassificationRoastingResultCopyWith<$Res> {
+  _$ClassificationRoastingResultCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roastingId = freezed,
+    Object? result = freezed,
+    Object? resultLabel = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roastingId: freezed == roastingId
+          ? _value.roastingId
+          : roastingId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      result: freezed == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      resultLabel: freezed == resultLabel
+          ? _value.resultLabel
+          : resultLabel // ignore: cast_nullable_to_non_nullable
+              as ResultLabelType?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClassificationRoastingResultImplCopyWith<$Res>
+    implements $ClassificationRoastingResultCopyWith<$Res> {
+  factory _$$ClassificationRoastingResultImplCopyWith(
+          _$ClassificationRoastingResultImpl value,
+          $Res Function(_$ClassificationRoastingResultImpl) then) =
+      __$$ClassificationRoastingResultImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'roasting_id') int? roastingId,
+      Map<String, dynamic>? result,
+      @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class __$$ClassificationRoastingResultImplCopyWithImpl<$Res>
+    extends _$ClassificationRoastingResultCopyWithImpl<$Res,
+        _$ClassificationRoastingResultImpl>
+    implements _$$ClassificationRoastingResultImplCopyWith<$Res> {
+  __$$ClassificationRoastingResultImplCopyWithImpl(
+      _$ClassificationRoastingResultImpl _value,
+      $Res Function(_$ClassificationRoastingResultImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? roastingId = freezed,
+    Object? result = freezed,
+    Object? resultLabel = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$ClassificationRoastingResultImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roastingId: freezed == roastingId
+          ? _value.roastingId
+          : roastingId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      result: freezed == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      resultLabel: freezed == resultLabel
+          ? _value.resultLabel
+          : resultLabel // ignore: cast_nullable_to_non_nullable
+              as ResultLabelType?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClassificationRoastingResultImpl
+    implements _ClassificationRoastingResult {
+  _$ClassificationRoastingResultImpl(
+      {this.id,
+      @JsonKey(name: 'roasting_id') this.roastingId,
+      this.result,
+      @JsonKey(name: 'result_label') this.resultLabel,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt});
+
+  factory _$ClassificationRoastingResultImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ClassificationRoastingResultImplFromJson(json);
+
+  @override
+  int? id;
+  @override
+  @JsonKey(name: 'roasting_id')
+  int? roastingId;
+  @override
+  Map<String, dynamic>? result;
+  @override
+  @JsonKey(name: 'result_label')
+  ResultLabelType? resultLabel;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? updatedAt;
+
+  @override
+  String toString() {
+    return 'ClassificationRoastingResult(id: $id, roastingId: $roastingId, result: $result, resultLabel: $resultLabel, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClassificationRoastingResultImplCopyWith<
+          _$ClassificationRoastingResultImpl>
+      get copyWith => __$$ClassificationRoastingResultImplCopyWithImpl<
+          _$ClassificationRoastingResultImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClassificationRoastingResultImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClassificationRoastingResult
+    implements ClassificationRoastingResult {
+  factory _ClassificationRoastingResult(
+          {int? id,
+          @JsonKey(name: 'roasting_id') int? roastingId,
+          Map<String, dynamic>? result,
+          @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+          @JsonKey(name: 'created_at') DateTime? createdAt,
+          @JsonKey(name: 'updated_at') DateTime? updatedAt}) =
+      _$ClassificationRoastingResultImpl;
+
+  factory _ClassificationRoastingResult.fromJson(Map<String, dynamic> json) =
+      _$ClassificationRoastingResultImpl.fromJson;
+
+  @override
+  int? get id;
+  set id(int? value);
+  @override
+  @JsonKey(name: 'roasting_id')
+  int? get roastingId;
+  @JsonKey(name: 'roasting_id')
+  set roastingId(int? value);
+  @override
+  Map<String, dynamic>? get result;
+  set result(Map<String, dynamic>? value);
+  @override
+  @JsonKey(name: 'result_label')
+  ResultLabelType? get resultLabel;
+  @JsonKey(name: 'result_label')
+  set resultLabel(ResultLabelType? value);
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value);
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value);
+  @override
+  @JsonKey(ignore: true)
+  _$$ClassificationRoastingResultImplCopyWith<
+          _$ClassificationRoastingResultImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 Roasting _$RoastingFromJson(Map<String, dynamic> json) {
@@ -1588,10 +1999,10 @@ ClassificationResult _$ClassificationResultFromJson(Map<String, dynamic> json) {
 mixin _$ClassificationResult {
   int? get id => throw _privateConstructorUsedError;
   set id(int? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'roasting_id')
-  int? get roastingId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'roasting_id')
-  set roastingId(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'company_id')
+  int? get companyId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'company_id')
+  set companyId(int? value) => throw _privateConstructorUsedError;
   Map<String, dynamic>? get result => throw _privateConstructorUsedError;
   set result(Map<String, dynamic>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'result_label')
@@ -1621,7 +2032,7 @@ abstract class $ClassificationResultCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      @JsonKey(name: 'roasting_id') int? roastingId,
+      @JsonKey(name: 'company_id') int? companyId,
       Map<String, dynamic>? result,
       @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -1643,7 +2054,7 @@ class _$ClassificationResultCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = freezed,
-    Object? roastingId = freezed,
+    Object? companyId = freezed,
     Object? result = freezed,
     Object? resultLabel = freezed,
     Object? createdAt = freezed,
@@ -1654,9 +2065,9 @@ class _$ClassificationResultCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      roastingId: freezed == roastingId
-          ? _value.roastingId
-          : roastingId // ignore: cast_nullable_to_non_nullable
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
               as int?,
       result: freezed == result
           ? _value.result
@@ -1688,7 +2099,7 @@ abstract class _$$ClassificationResultImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      @JsonKey(name: 'roasting_id') int? roastingId,
+      @JsonKey(name: 'company_id') int? companyId,
       Map<String, dynamic>? result,
       @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -1707,7 +2118,7 @@ class __$$ClassificationResultImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? roastingId = freezed,
+    Object? companyId = freezed,
     Object? result = freezed,
     Object? resultLabel = freezed,
     Object? createdAt = freezed,
@@ -1718,9 +2129,9 @@ class __$$ClassificationResultImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      roastingId: freezed == roastingId
-          ? _value.roastingId
-          : roastingId // ignore: cast_nullable_to_non_nullable
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
               as int?,
       result: freezed == result
           ? _value.result
@@ -1747,7 +2158,7 @@ class __$$ClassificationResultImplCopyWithImpl<$Res>
 class _$ClassificationResultImpl implements _ClassificationResult {
   _$ClassificationResultImpl(
       {this.id,
-      @JsonKey(name: 'roasting_id') this.roastingId,
+      @JsonKey(name: 'company_id') this.companyId,
       this.result,
       @JsonKey(name: 'result_label') this.resultLabel,
       @JsonKey(name: 'created_at') this.createdAt,
@@ -1759,8 +2170,8 @@ class _$ClassificationResultImpl implements _ClassificationResult {
   @override
   int? id;
   @override
-  @JsonKey(name: 'roasting_id')
-  int? roastingId;
+  @JsonKey(name: 'company_id')
+  int? companyId;
   @override
   Map<String, dynamic>? result;
   @override
@@ -1775,7 +2186,7 @@ class _$ClassificationResultImpl implements _ClassificationResult {
 
   @override
   String toString() {
-    return 'ClassificationResult(id: $id, roastingId: $roastingId, result: $result, resultLabel: $resultLabel, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ClassificationResult(id: $id, companyId: $companyId, result: $result, resultLabel: $resultLabel, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @JsonKey(ignore: true)
@@ -1797,7 +2208,7 @@ class _$ClassificationResultImpl implements _ClassificationResult {
 abstract class _ClassificationResult implements ClassificationResult {
   factory _ClassificationResult(
           {int? id,
-          @JsonKey(name: 'roasting_id') int? roastingId,
+          @JsonKey(name: 'company_id') int? companyId,
           Map<String, dynamic>? result,
           @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
           @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -1811,10 +2222,10 @@ abstract class _ClassificationResult implements ClassificationResult {
   int? get id;
   set id(int? value);
   @override
-  @JsonKey(name: 'roasting_id')
-  int? get roastingId;
-  @JsonKey(name: 'roasting_id')
-  set roastingId(int? value);
+  @JsonKey(name: 'company_id')
+  int? get companyId;
+  @JsonKey(name: 'company_id')
+  set companyId(int? value);
   @override
   Map<String, dynamic>? get result;
   set result(Map<String, dynamic>? value);
@@ -1837,4 +2248,321 @@ abstract class _ClassificationResult implements ClassificationResult {
   @JsonKey(ignore: true)
   _$$ClassificationResultImplCopyWith<_$ClassificationResultImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+Roastery _$RoasteryFromJson(Map<String, dynamic> json) {
+  return _Roastery.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Roastery {
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  int? get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  set userId(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'company_id')
+  int? get companyId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'company_id')
+  set companyId(int? value) => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  set name(String? value) => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  set address(String? value) => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
+  set phoneNumber(String? value) => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  set description(String? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value) => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value) => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RoasteryCopyWith<Roastery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RoasteryCopyWith<$Res> {
+  factory $RoasteryCopyWith(Roastery value, $Res Function(Roastery) then) =
+      _$RoasteryCopyWithImpl<$Res, Roastery>;
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'user_id') int? userId,
+      @JsonKey(name: 'company_id') int? companyId,
+      String? name,
+      String? address,
+      String? phoneNumber,
+      String? description,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class _$RoasteryCopyWithImpl<$Res, $Val extends Roastery>
+    implements $RoasteryCopyWith<$Res> {
+  _$RoasteryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? userId = freezed,
+    Object? companyId = freezed,
+    Object? name = freezed,
+    Object? address = freezed,
+    Object? phoneNumber = freezed,
+    Object? description = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$RoasteryImplCopyWith<$Res>
+    implements $RoasteryCopyWith<$Res> {
+  factory _$$RoasteryImplCopyWith(
+          _$RoasteryImpl value, $Res Function(_$RoasteryImpl) then) =
+      __$$RoasteryImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? id,
+      @JsonKey(name: 'user_id') int? userId,
+      @JsonKey(name: 'company_id') int? companyId,
+      String? name,
+      String? address,
+      String? phoneNumber,
+      String? description,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+}
+
+/// @nodoc
+class __$$RoasteryImplCopyWithImpl<$Res>
+    extends _$RoasteryCopyWithImpl<$Res, _$RoasteryImpl>
+    implements _$$RoasteryImplCopyWith<$Res> {
+  __$$RoasteryImplCopyWithImpl(
+      _$RoasteryImpl _value, $Res Function(_$RoasteryImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? userId = freezed,
+    Object? companyId = freezed,
+    Object? name = freezed,
+    Object? address = freezed,
+    Object? phoneNumber = freezed,
+    Object? description = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$RoasteryImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$RoasteryImpl implements _Roastery {
+  _$RoasteryImpl(
+      {this.id,
+      @JsonKey(name: 'user_id') this.userId,
+      @JsonKey(name: 'company_id') this.companyId,
+      this.name,
+      this.address,
+      this.phoneNumber,
+      this.description,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt});
+
+  factory _$RoasteryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RoasteryImplFromJson(json);
+
+  @override
+  int? id;
+  @override
+  @JsonKey(name: 'user_id')
+  int? userId;
+  @override
+  @JsonKey(name: 'company_id')
+  int? companyId;
+  @override
+  String? name;
+  @override
+  String? address;
+  @override
+  String? phoneNumber;
+  @override
+  String? description;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? updatedAt;
+
+  @override
+  String toString() {
+    return 'Roastery(id: $id, userId: $userId, companyId: $companyId, name: $name, address: $address, phoneNumber: $phoneNumber, description: $description, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RoasteryImplCopyWith<_$RoasteryImpl> get copyWith =>
+      __$$RoasteryImplCopyWithImpl<_$RoasteryImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RoasteryImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Roastery implements Roastery {
+  factory _Roastery(
+      {int? id,
+      @JsonKey(name: 'user_id') int? userId,
+      @JsonKey(name: 'company_id') int? companyId,
+      String? name,
+      String? address,
+      String? phoneNumber,
+      String? description,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt}) = _$RoasteryImpl;
+
+  factory _Roastery.fromJson(Map<String, dynamic> json) =
+      _$RoasteryImpl.fromJson;
+
+  @override
+  int? get id;
+  set id(int? value);
+  @override
+  @JsonKey(name: 'user_id')
+  int? get userId;
+  @JsonKey(name: 'user_id')
+  set userId(int? value);
+  @override
+  @JsonKey(name: 'company_id')
+  int? get companyId;
+  @JsonKey(name: 'company_id')
+  set companyId(int? value);
+  @override
+  String? get name;
+  set name(String? value);
+  @override
+  String? get address;
+  set address(String? value);
+  @override
+  String? get phoneNumber;
+  set phoneNumber(String? value);
+  @override
+  String? get description;
+  set description(String? value);
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
+  @JsonKey(name: 'created_at')
+  set createdAt(DateTime? value);
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt;
+  @JsonKey(name: 'updated_at')
+  set updatedAt(DateTime? value);
+  @override
+  @JsonKey(ignore: true)
+  _$$RoasteryImplCopyWith<_$RoasteryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

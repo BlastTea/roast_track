@@ -17,29 +17,33 @@ class HomePageState extends State<HomePage> {
         body: [
           currentUser?.role == UserRole.admin ? const HomeAdminFragment() : const HomeRoasteryFragment(),
           currentUser?.role == UserRole.admin ? const OrderFragment() : const ClassificationRoasteryFragment(),
-          currentUser?.role == UserRole.admin ? const RoasteryAdminFragment() : const RoastingRoasteryFragment(),
+          currentUser?.role == UserRole.admin ? const RoasteryAdminFragment() : const OrderFragment(),
+          if (currentUser?.role == UserRole.roastery) const ResultRoasteryFragment(),
           const ProfileFragment(),
         ][_selectedIndex],
         bottomNavigationBar: NavigationBar(
           destinations: List.generate(
-            4,
+            currentUser?.role == UserRole.admin ? 4 : 5,
             (index) => NavigationDestination(
               icon: [
                 const Icon(Icons.home_outlined),
-                const Icon(Icons.receipt_long_outlined),
-                const Icon(Icons.groups),
+                currentUser?.role == UserRole.admin ? const Icon(Icons.receipt_long_outlined) : const Icon(Icons.camera_alt_outlined),
+                currentUser?.role == UserRole.admin ? const Icon(Icons.groups_outlined) : const Icon(Icons.calendar_today_outlined),
+                if (currentUser?.role == UserRole.roastery) const Icon(Icons.summarize_outlined),
                 const Icon(Icons.account_circle_outlined),
               ][index],
               selectedIcon: [
                 const Icon(Icons.home),
-                const Icon(Icons.receipt_long),
+                currentUser?.role == UserRole.admin ? const Icon(Icons.receipt_long) : const Icon(Icons.camera_alt),
                 currentUser?.role == UserRole.admin ? const Icon(Icons.groups) : const Icon(Icons.calendar_today),
+                if (currentUser?.role == UserRole.roastery) const Icon(Icons.summarize),
                 const Icon(Icons.account_circle),
               ][index],
               label: [
                 'Beranda',
-                currentUser?.role == UserRole.admin ? 'Pesanan' : 'Klasifikasi',
+                currentUser?.role == UserRole.admin ? 'Order' : 'Klasifikasi',
                 currentUser?.role == UserRole.admin ? 'Roastery' : 'Roasting',
+                if (currentUser?.role == UserRole.roastery) 'Hasil',
                 'Profil',
               ][index],
             ),

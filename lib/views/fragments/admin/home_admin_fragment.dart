@@ -7,7 +7,7 @@ class HomeAdminFragment extends StatelessWidget {
   Widget build(BuildContext context) => SafeArea(
         child: Center(
           child: Text(
-            'Home admin fragment',
+            'Tambahkan grafik statistik penjualan',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),

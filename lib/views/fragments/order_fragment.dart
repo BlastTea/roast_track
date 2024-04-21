@@ -13,18 +13,28 @@ class OrderFragment extends StatelessWidget {
         builder: (context, animation) => Column(
           children: [
             ListTile(
-              title: Text(order.name ?? '?'),
-              subtitle: Text(order.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'),
-              trailing: IconButton.outlined(
-                onPressed: () => NavigationHelper.to(
-                  MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => const RoastingPage(),
-                  ),
-                ),
-                icon: const Icon(Icons.play_arrow_rounded),
-              ),
-              onTap: () => NavigationHelper.to(MaterialPageRoute(builder: (context) => AddEditOrderPage.edit(order: order))),
+              title: Text(order.orderersName ?? '?'),
+              subtitle: Text('Tipe biji : ${order.beanType?.text ?? '?'}\nJumlah : ${order.amount?.toThousandFormat() ?? '0'}\nTotal : Rp ${order.total?.toThousandFormat() ?? '0'}\n${order.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'}'),
+              isThreeLine: true,
+              trailing: currentUser?.role == UserRole.roastery
+                  ? IconButton.outlined(
+                      onPressed: () => NavigationHelper.to(
+                        MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => const RoastingPage(),
+                        ),
+                      ),
+                      icon: const Icon(Icons.play_arrow_rounded),
+                    )
+                  : null,
+              onTap: currentUser?.role == UserRole.admin
+                  ? () => NavigationHelper.to(MaterialPageRoute(builder: (context) => AddEditOrderPage.edit(order: order)))
+                  : () => NavigationHelper.to(
+                        MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => const RoastingPage(),
+                        ),
+                      ),
             ),
             const Divider(),
           ],
@@ -39,16 +49,18 @@ class OrderFragment extends StatelessWidget {
       builder: (context, stateOrder) {
         if (stateOrder is OrderDataLoaded) {
           return Scaffold(
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () => NavigationHelper.to(
-                MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (context) => const AddEditOrderPage.add(),
-                ),
-              ),
-              label: const Text('Pesanan'),
-              icon: const Icon(Icons.add),
-            ),
+            floatingActionButton: currentUser?.role == UserRole.admin
+                ? FloatingActionButton.extended(
+                    onPressed: () => NavigationHelper.to(
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) => const AddEditOrderPage.add(),
+                      ),
+                    ),
+                    label: const Text('Order'),
+                    icon: const Icon(Icons.add),
+                  )
+                : null,
             body: stateOrder.orders.isEmpty
                 ? RetryButton(
                     titleText: 'Tidak ada data',
@@ -62,6 +74,7 @@ class OrderFragment extends StatelessWidget {
                         await completer.future;
                       },
                       child: AnimatedList(
+                        physics: const AlwaysScrollableScrollPhysics(),
                         key: stateOrder.keyList,
                         controller: stateOrder.controllerList,
                         padding: const EdgeInsets.only(top: 16.0, bottom: kBottomFabPadding),

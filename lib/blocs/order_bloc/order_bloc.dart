@@ -2,22 +2,31 @@ part of '../blocs.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc() : super(OrderInitial()) {
-    _textControllerOrderName.addListener(() {
-      _currentOrder.name = _textControllerOrderName.text.trim();
-      add(SetOrderState());
-    });
+    _textControllerOrderersName.addListener(() => _currentOrder.orderersName = _textControllerOrderersName.text.trim());
+
+    _textControllerAddress.addListener(() => _currentOrder.address = _textControllerAddress.text.trim());
+
+    _textControllerFromDistrict.addListener(() => _currentOrder.fromDistrict = _textControllerFromDistrict.text.trim());
+
+    _textControllerAmount.addListener(() => _currentOrder.amount = _textControllerAmount.number?.toInt());
+
+    _textControllerTotal.addListener(() => _currentOrder.total = _textControllerTotal.number?.toDouble());
 
     on<SetOrderState>((event, emit) => emit(event.state ?? _orderDataLoaded));
 
     on<SetOrderToInitial>((event, emit) {
       _keyList = GlobalKey();
 
-      _textControllerOrderName.clear();
+      _textControllerOrderersName.clear();
+      _textControllerAddress.clear();
+      _textControllerFromDistrict.clear();
+      _textControllerAmount.clear();
+      _textControllerTotal.clear();
 
       _orders.clear();
 
-      _originalOrder = Order();
-      _currentOrder = Order();
+      _originalOrder = Order(companyId: currentCompany?.id);
+      _currentOrder = Order(companyId: currentCompany?.id);
 
       emit(OrderInitial());
     });
@@ -47,15 +56,44 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       _originalOrder = event.value.copyWith();
       _currentOrder = event.value.copyWith();
 
-      _textControllerOrderName.text = _currentOrder.name ?? '';
+      _textControllerOrderersName.text = _currentOrder.orderersName ?? '';
+      _textControllerAddress.text = _currentOrder.address ?? '';
+      _textControllerFromDistrict.text = _currentOrder.fromDistrict ?? '';
+      _textControllerAmount.text = _currentOrder.amount?.toString() ?? '';
+      _textControllerTotal.text = _currentOrder.total?.toInt().toString() ?? '';
 
       emit(_orderDataLoaded);
     });
 
+    on<SetCurrentOrder>((event, emit) async {
+      _currentOrder = event.value.copyWith();
+      emit(_orderDataLoaded);
+    });
+
     on<SaveOrderPressed>((event, emit) async {
-      if (_currentOrder.name?.isEmpty ?? true) {
+      if (_currentOrder.orderersName?.isEmpty ?? true) {
         NavigationHelper.clearSnackBars();
-        NavigationHelper.showSnackBar(const SnackBar(content: Text('Nama masih kosong')));
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Nama customer masih kosong')));
+        return;
+      } else if (_currentOrder.address?.isEmpty ?? true) {
+        NavigationHelper.clearSnackBars();
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Alamat masih kosong')));
+        return;
+      } else if (_currentOrder.beanType == null) {
+        NavigationHelper.clearSnackBars();
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Tipe biji masih kosong')));
+        return;
+      } else if (_currentOrder.fromDistrict?.isEmpty ?? true) {
+        NavigationHelper.clearSnackBars();
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Kota asal biji masih kosong')));
+        return;
+      } else if ((_currentOrder.amount ?? 0) < 1) {
+        NavigationHelper.clearSnackBars();
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Jumlah masih kosong')));
+        return;
+      } else if ((_currentOrder.total ?? 0) < 1) {
+        NavigationHelper.clearSnackBars();
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Total masih kosong')));
         return;
       }
 
@@ -70,16 +108,13 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         if (isAdd) {
           order = await ApiHelper.post(
             '/api/v1/orders',
-            body: {'name': _textControllerOrderName.text.trim()},
+            body: _currentOrder.toJson(),
             includeCompanyId: true,
           ).then((value) => Order.fromJson(value['data']));
         } else {
           order = await ApiHelper.put(
             '/api/v1/orders',
-            body: {
-              'id': _currentOrder.id,
-              'name': _textControllerOrderName.text.trim(),
-            },
+            body: _currentOrder.toJson(),
             includeCompanyId: true,
           ).then((value) => Order.fromJson(value['data']));
         }
@@ -108,9 +143,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         _orders[index] = order;
       }
 
-      _textControllerOrderName.clear();
-      _originalOrder = Order();
-      _currentOrder = Order();
+      _textControllerOrderersName.clear();
+      _originalOrder = Order(companyId: currentCompany?.id);
+      _currentOrder = Order(companyId: currentCompany?.id);
       emit(_orderDataLoaded);
 
       if (isAdd) {
@@ -124,17 +159,25 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   final ScrollController _controllerList = ScrollController();
 
-  final TextEditingController _textControllerOrderName = TextEditingController();
+  final TextEditingController _textControllerOrderersName = TextEditingController();
+  final TextEditingController _textControllerAddress = TextEditingController();
+  final TextEditingController _textControllerFromDistrict = TextEditingController();
+  final TextEditingControllerThousandFormat _textControllerAmount = TextEditingControllerThousandFormat();
+  final TextEditingControllerThousandFormat _textControllerTotal = TextEditingControllerThousandFormat();
 
   List<Order> _orders = [];
 
-  Order _originalOrder = Order();
-  Order _currentOrder = Order();
+  Order _originalOrder = Order(id: currentCompany?.id);
+  Order _currentOrder = Order(id: currentCompany?.id);
 
   OrderDataLoaded get _orderDataLoaded => OrderDataLoaded(
         keyList: _keyList,
         controllerList: _controllerList,
-        textControllerOrderName: _textControllerOrderName,
+        textControllerOrderersName: _textControllerOrderersName,
+        textControllerAddress: _textControllerAddress,
+        textControllerFromDistrict: _textControllerFromDistrict,
+        textControllerAmount: _textControllerAmount,
+        textControllerTotal: _textControllerTotal,
         orders: _orders,
         originalOrder: _originalOrder,
         currentOrder: _currentOrder,

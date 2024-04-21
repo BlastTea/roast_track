@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MWidgetDynamicColorBuilder(
         builder: (context, theme, darkTheme, themeMode, colorScheme) => MWidgetTheme(
+          invertThousandSeparator: true,
           dialogTheme: MWidgetDialogThemeData(
             primaryFilledButton: true,
             onRenderMessage: (context, message) {
@@ -82,12 +83,28 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(36.0),
                   ),
                 ),
+                dropdownMenuTheme: DropdownMenuThemeData(
+                  inputDecorationTheme: InputDecorationTheme(
+                    contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 12.0, 12.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(36.0),
+                    ),
+                  ),
+                ),
               ),
               darkTheme: darkTheme.copyWith(
                 inputDecorationTheme: InputDecorationTheme(
                   contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 12.0, 12.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(36.0),
+                  ),
+                ),
+                dropdownMenuTheme: DropdownMenuThemeData(
+                  inputDecorationTheme: InputDecorationTheme(
+                    contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 12.0, 12.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(36.0),
+                    ),
                   ),
                 ),
               ),

@@ -8,6 +8,7 @@ class User with _$User {
   factory User({
     int? id,
     String? username,
+    String? email,
     UserRole? role,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
@@ -50,13 +51,32 @@ class Order with _$Order {
     int? id,
     @JsonKey(name: 'admin_id') int? adminId,
     @JsonKey(name: 'company_id') int? companyId,
-    String? name,
-    OrderStatus? status,
+    @JsonKey(name: 'orderers_name') String? orderersName,
+    String? address,
+    @JsonKey(name: 'bean_type') BeanType? beanType,
+    @JsonKey(name: 'from_district') String? fromDistrict,
+    int? amount,
+    double? total,
+    @Default(OrderStatus.inProgress) OrderStatus? status,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Order;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+}
+
+@unfreezed
+class ClassificationRoastingResult with _$ClassificationRoastingResult {
+  factory ClassificationRoastingResult({
+    int? id,
+    @JsonKey(name: 'roasting_id') int? roastingId,
+    Map<String, dynamic>? result,
+    @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+  }) = _ClassificationRoastingResult;
+
+  factory ClassificationRoastingResult.fromJson(Map<String, dynamic> json) => _$ClassificationRoastingResultFromJson(json);
 }
 
 @unfreezed
@@ -94,7 +114,7 @@ class Degree with _$Degree {
 class ClassificationResult with _$ClassificationResult {
   factory ClassificationResult({
     int? id,
-    @JsonKey(name: 'roasting_id') int? roastingId,
+    @JsonKey(name: 'company_id') int? companyId,
     Map<String, dynamic>? result,
     @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
     @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -102,6 +122,23 @@ class ClassificationResult with _$ClassificationResult {
   }) = _ClassificationResult;
 
   factory ClassificationResult.fromJson(Map<String, dynamic> json) => _$ClassificationResultFromJson(json);
+}
+
+@unfreezed
+class Roastery with _$Roastery {
+  factory Roastery({
+    int? id,
+    @JsonKey(name: 'user_id') int? userId,
+    @JsonKey(name: 'company_id') int? companyId,
+    String? name,
+    String? address,
+    String? phoneNumber,
+    String? description,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+  }) = _Roastery;
+
+  factory Roastery.fromJson(Map<String, dynamic> json) => _$RoasteryFromJson(json);
 }
 
 enum UserRole {
@@ -165,5 +202,24 @@ enum ResultLabelType {
   green,
   light,
   medium,
-  dark,
+  dark;
+
+  String get text => switch (this) {
+        green => 'Green',
+        light => 'Light',
+        medium => 'Medium',
+        dark => 'Dark',
+      };
+}
+
+enum BeanType {
+  light,
+  medium,
+  dark;
+
+  String get text => switch (this) {
+        light => 'Light',
+        medium => 'Medium',
+        dark => 'Dark',
+      };
 }

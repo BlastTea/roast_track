@@ -23,4 +23,10 @@ class EditOrder extends OrderEvent {
   final Order value;
 }
 
+class SetCurrentOrder extends OrderEvent {
+  SetCurrentOrder({required this.value});
+
+  final Order value;
+}
+
 class SaveOrderPressed extends OrderEvent {}

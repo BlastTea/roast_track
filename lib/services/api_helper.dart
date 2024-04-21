@@ -146,6 +146,8 @@ class ApiHelper {
       // Ignored, really
     }
 
+    MyApp.companyBloc.add(SetCompanyToInitial());
+
     SharedPreferences sharedPref = await SharedPreferences.getInstance();
 
     sharedPref.remove(_keyToken);
