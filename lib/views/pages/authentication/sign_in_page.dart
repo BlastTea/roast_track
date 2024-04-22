@@ -18,11 +18,28 @@ class SignInPage extends StatelessWidget {
 
           return Scaffold(
             body: AutofillGroup(
-              child: Center(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  shrinkWrap: true,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const SizedBox(height: 70.0),
+                    Center(
+                      child: ImageContainer.hero(
+                        tag: 'Home roastery fragment',
+                        width: 150.0,
+                        height: 150.0,
+                        borderRadius: BorderRadius.circular(75.0),
+                        image: const AssetImage('assets/images/logo.png'),
+                      ),
+                    ),
+                    const SizedBox(height: 32.0),
+                    Text(
+                      'Sign In',
+                      style: Theme.of(context).textTheme.displaySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 32.0),
                     TextField(
                       controller: stateAuthentication.textControllerUsernameSignIn,
                       decoration: const InputDecoration(
@@ -57,7 +74,7 @@ class SignInPage extends StatelessWidget {
                               child: CircularProgressIndicator(),
                             )
                           : const Text('Sign In'),
-                    )
+                    ),
                   ],
                 ),
               ),

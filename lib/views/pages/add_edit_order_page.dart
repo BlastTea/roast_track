@@ -1,4 +1,4 @@
-part of '../pages.dart';
+part of 'pages.dart';
 
 class AddEditOrderPage extends StatefulWidget {
   const AddEditOrderPage.add({super.key})
@@ -79,9 +79,11 @@ class _AddEditOrderPageState extends State<AddEditOrderPage> {
                     decoration: const InputDecoration(
                       labelText: 'Kota asal biji',
                     ),
+                    maxLength: 100,
+                    buildCounter: (context, {required currentLength, required isFocused, required maxLength}) => Container(),
                     textInputAction: TextInputAction.next,
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 8.0),
                   TextField(
                     controller: stateOrder.textControllerAmount,
                     decoration: const InputDecoration(
@@ -95,11 +97,12 @@ class _AddEditOrderPageState extends State<AddEditOrderPage> {
                     controller: stateOrder.textControllerTotal,
                     decoration: const InputDecoration(
                       labelText: 'Total',
-                      prefixText: 'Rp',
+                      prefixText: 'Rp ',
                     ),
                     keyboardType: TextInputType.number,
                     onEditingComplete: () => MyApp.orderBloc.add(SaveOrderPressed()),
                   ),
+                  const SizedBox(height: kBottomFabPadding),
                 ],
               ),
             );

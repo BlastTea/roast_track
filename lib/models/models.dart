@@ -7,9 +7,17 @@ part 'models.g.dart';
 class User with _$User {
   factory User({
     int? id,
+    @JsonKey(name: 'company_id') int? companyId,
     String? username,
     String? email,
     UserRole? role,
+    String? name,
+    String? address,
+    @JsonKey(name: 'phone_number') String? phoneNumber,
+    String? description,
+    Company? company,
+    List<Order>? orders,
+    List<Roasting>? roastings,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _User;
@@ -23,7 +31,9 @@ class Company with _$Company {
     int? id,
     String? name,
     String? address,
-    List<Member>? members,
+    List<User>? users,
+    @JsonKey(name: 'classification_results') List<ClassificationResult>? classificationResults,
+    List<Order>? orders,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Company;
@@ -32,17 +42,18 @@ class Company with _$Company {
 }
 
 @unfreezed
-class Member with _$Member {
-  factory Member({
+class ClassificationResult with _$ClassificationResult {
+  factory ClassificationResult({
     int? id,
-    @JsonKey(name: 'user_id') int? userId,
     @JsonKey(name: 'company_id') int? companyId,
-    UserRole? role,
+    Map<String, dynamic>? result,
+    @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+    Company? company,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
-  }) = _Member;
+  }) = _ClassificationResult;
 
-  factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
+  factory ClassificationResult.fromJson(Map<String, dynamic> json) => _$ClassificationResultFromJson(json);
 }
 
 @unfreezed
@@ -58,25 +69,14 @@ class Order with _$Order {
     int? amount,
     double? total,
     @Default(OrderStatus.inProgress) OrderStatus? status,
+    User? user,
+    Company? company,
+    List<Roasting>? roastings,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Order;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
-}
-
-@unfreezed
-class ClassificationRoastingResult with _$ClassificationRoastingResult {
-  factory ClassificationRoastingResult({
-    int? id,
-    @JsonKey(name: 'roasting_id') int? roastingId,
-    Map<String, dynamic>? result,
-    @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
-    @JsonKey(name: 'updated_at') DateTime? updatedAt,
-  }) = _ClassificationRoastingResult;
-
-  factory ClassificationRoastingResult.fromJson(Map<String, dynamic> json) => _$ClassificationRoastingResultFromJson(json);
 }
 
 @unfreezed
@@ -87,6 +87,10 @@ class Roasting with _$Roasting {
     @JsonKey(name: 'order_id') int? orderId,
     UnitType? unit,
     @JsonKey(name: 'time_elapsed') double? timeElapsed,
+    User? user,
+    Order? order,
+    List<Degree>? degrees,
+    @JsonKey(name: 'classification_roasting_results') List<ClassificationRoastingResult>? classificationRoastingResults,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Roasting;
@@ -103,6 +107,7 @@ class Degree with _$Degree {
     @JsonKey(name: 'env_temp') double? envTemp,
     @JsonKey(name: 'bean_temp') double? beanTemp,
     @JsonKey(name: 'time_elapsed') double? timeElapsed,
+    Roasting? roasting,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Degree;
@@ -111,40 +116,38 @@ class Degree with _$Degree {
 }
 
 @unfreezed
-class ClassificationResult with _$ClassificationResult {
-  factory ClassificationResult({
+class ClassificationRoastingResult with _$ClassificationRoastingResult {
+  factory ClassificationRoastingResult({
     int? id,
-    @JsonKey(name: 'company_id') int? companyId,
+    @JsonKey(name: 'roasting_id') int? roastingId,
     Map<String, dynamic>? result,
     @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
+    Roasting? roasting,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
-  }) = _ClassificationResult;
+  }) = _ClassificationRoastingResult;
 
-  factory ClassificationResult.fromJson(Map<String, dynamic> json) => _$ClassificationResultFromJson(json);
+  factory ClassificationRoastingResult.fromJson(Map<String, dynamic> json) => _$ClassificationRoastingResultFromJson(json);
 }
 
-@unfreezed
-class Roastery with _$Roastery {
-  factory Roastery({
-    int? id,
-    @JsonKey(name: 'user_id') int? userId,
-    @JsonKey(name: 'company_id') int? companyId,
-    String? name,
-    String? address,
-    String? phoneNumber,
-    String? description,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
-    @JsonKey(name: 'updated_at') DateTime? updatedAt,
-  }) = _Roastery;
+@freezed
+class SalesStatistics with _$SalesStatistics {
+  factory SalesStatistics({
+    DateTime? date,
+    int? total,
+  }) = _SalesStatistics;
 
-  factory Roastery.fromJson(Map<String, dynamic> json) => _$RoasteryFromJson(json);
+  factory SalesStatistics.fromJson(Map<String, dynamic> json) => _$SalesStatisticsFromJson(json);
 }
 
 enum UserRole {
-  owner,
   admin,
-  roastery,
+  roastery;
+
+  String get text => switch (this) {
+        admin => 'Admin',
+        roastery => 'Roastery',
+      };
 }
 
 enum OrderStatus {

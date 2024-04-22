@@ -4,14 +4,31 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
   RoastingBloc() : super(RoastingInitial()) {
     on<SetRoastingState>((event, emit) => emit(_roastingDataLoaded));
 
-    on<SetRoastingToInitial>((event, emit) {});
-
-    on<InitializeRoastingData>((event, emit) {
-      if (event.animationController != null) _animationController = event.animationController;
-
+    on<SetRoastingToInitial>((event, emit) {
       _currentRoasting = Roasting();
 
+      _degrees.clear();
+
+      _lastDegree = DegreeType.charge;
+
       _stopwatch.reset();
+      _stopwatch.stop();
+
+      _currentTimer?.cancel();
+      _currentTimer = null;
+
+      emit(RoastingInitial());
+    });
+
+    on<InitializeRoastingData>((event, emit) {
+      _currentRoasting = Roasting();
+
+      _degrees.clear();
+
+      _lastDegree = DegreeType.charge;
+
+      _stopwatch.reset();
+      _stopwatch.stop();
 
       _currentTimer?.cancel();
       _currentTimer = null;
@@ -35,7 +52,7 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
                 ? Roasting(
                     roasteryId: currentUser?.id,
                     unit: UnitType.celcius,
-                    timeElapsed: 600000,
+                    timeElapsed: 110000,
                   )
                 : _currentRoasting,
             degrees: kDebugMode
@@ -60,9 +77,6 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
       } else {
         _stopwatch.start();
         _currentTimer = Timer.periodic(Durations.extralong4, (timer) => add(SetRoastingState()));
-
-        // TODO: remove controller
-        _animationController?.forward();
       }
       emit(_roastingDataLoaded);
     });
@@ -95,9 +109,6 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
     });
   }
 
-  // TODO: remove controller
-  AnimationController? _animationController;
-
   Roasting _currentRoasting = Roasting();
 
   List<Degree> _degrees = [];
@@ -109,7 +120,6 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
   Timer? _currentTimer;
 
   RoastingDataLoaded get _roastingDataLoaded => RoastingDataLoaded(
-        animationController: _animationController,
         currentRoasting: _currentRoasting,
         lastDegree: _lastDegree,
         stopwatch: _stopwatch,

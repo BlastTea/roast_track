@@ -23,30 +23,36 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       _textControllerAmount.clear();
       _textControllerTotal.clear();
 
+      _isInitializing = false;
+
       _orders.clear();
 
-      _originalOrder = Order(companyId: currentCompany?.id);
-      _currentOrder = Order(companyId: currentCompany?.id);
+      _originalOrder = Order();
+      _currentOrder = Order();
 
       emit(OrderInitial());
     });
 
     on<InitializeOrderData>((event, emit) async {
+      if (_isInitializing) return;
+
+      _isInitializing = true;
+
       if (event.completer == null) emit(OrderInitial());
 
       try {
         _orders = await ApiHelper.get(
           '/api/v1/orders',
           body: {'status': 'in_progress'},
-          ignoreAuthorization: false,
-          includeCompanyId: true,
         ).then((value) => (value['data'] as List).map((e) => Order.fromJson(e)).toList());
       } catch (e) {
+        _isInitializing = false;
         event.completer?.complete(false);
         emit(OrderError());
         return;
       }
 
+      _isInitializing = false;
       _keyList = GlobalKey();
       event.completer?.complete(true);
       emit(_orderDataLoaded);
@@ -109,13 +115,11 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           order = await ApiHelper.post(
             '/api/v1/orders',
             body: _currentOrder.toJson(),
-            includeCompanyId: true,
           ).then((value) => Order.fromJson(value['data']));
         } else {
           order = await ApiHelper.put(
             '/api/v1/orders',
             body: _currentOrder.toJson(),
-            includeCompanyId: true,
           ).then((value) => Order.fromJson(value['data']));
         }
       } catch (e) {
@@ -143,15 +147,46 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         _orders[index] = order;
       }
 
-      _textControllerOrderersName.clear();
-      _originalOrder = Order(companyId: currentCompany?.id);
-      _currentOrder = Order(companyId: currentCompany?.id);
+      _originalOrder = Order();
+      _currentOrder = Order();
       emit(_orderDataLoaded);
 
       if (isAdd) {
         await _controllerList.animateTo(_controllerList.position.maxScrollExtent, duration: Durations.medium2, curve: Curves.fastOutSlowIn);
         DefaultAnimatedListTransition.insertItemList(index: _orders.length - 1, state: _keyList.currentState!);
       }
+    });
+
+    on<DeleteOrderPressed>((event, emit) async {
+      bool? isDeleted = await showDeleteDialog(titleText: 'Hapus ${event.value.orderersName}?');
+
+      if (!(isDeleted ?? false)) return;
+
+      showLoadingDialog();
+
+      try {
+        await ApiHelper.delete(
+          '/api/v1/orders',
+          body: {'id': event.value.id},
+        );
+      } catch (e) {
+        NavigationHelper.back();
+        ApiHelper.handleError(e);
+        return;
+      }
+
+      NavigationHelper.back();
+
+      int index = _orders.indexWhere((element) => element.id == event.value.id);
+
+      _orders.removeAt(index);
+      emit(_orderDataLoaded);
+
+      await DefaultAnimatedListTransition.removeItemList(
+        index: index,
+        state: _keyList.currentState!,
+        builder: (context, animation) => OrderFragment.listItem(context: context, order: event.value, animation: animation),
+      );
     });
   }
 
@@ -165,10 +200,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   final TextEditingControllerThousandFormat _textControllerAmount = TextEditingControllerThousandFormat();
   final TextEditingControllerThousandFormat _textControllerTotal = TextEditingControllerThousandFormat();
 
+  bool _isInitializing = false;
+
   List<Order> _orders = [];
 
-  Order _originalOrder = Order(id: currentCompany?.id);
-  Order _currentOrder = Order(id: currentCompany?.id);
+  Order _originalOrder = Order();
+  Order _currentOrder = Order();
 
   OrderDataLoaded get _orderDataLoaded => OrderDataLoaded(
         keyList: _keyList,

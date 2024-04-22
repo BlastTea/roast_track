@@ -14,7 +14,9 @@ class OrderFragment extends StatelessWidget {
           children: [
             ListTile(
               title: Text(order.orderersName ?? '?'),
-              subtitle: Text('Tipe biji : ${order.beanType?.text ?? '?'}\nJumlah : ${order.amount?.toThousandFormat() ?? '0'}\nTotal : Rp ${order.total?.toThousandFormat() ?? '0'}\n${order.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'}'),
+              titleTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+              subtitle: Text('Tipe biji : ${order.beanType?.text ?? '?'}\nKota asal : ${order.fromDistrict ?? '?'}\nAlamat : ${order.address}\nJumlah : ${order.amount?.toThousandFormat() ?? '0'}\nTotal : Rp ${order.total?.toThousandFormat() ?? '0'}\n${order.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'}'),
+              subtitleTextStyle: Theme.of(context).textTheme.bodyLarge,
               isThreeLine: true,
               trailing: currentUser?.role == UserRole.roastery
                   ? IconButton.outlined(
@@ -26,7 +28,14 @@ class OrderFragment extends StatelessWidget {
                       ),
                       icon: const Icon(Icons.play_arrow_rounded),
                     )
-                  : null,
+                  : IconButton.outlined(
+                      onPressed: () => MyApp.orderBloc.add(DeleteOrderPressed(value: order)),
+                      icon: const Icon(Icons.delete),
+                      style: IconButton.styleFrom(
+                        foregroundColor: Colors.red.withOpacity(0.75),
+                        side: BorderSide(color: Colors.red.withOpacity(0.75)),
+                      ),
+                    ),
               onTap: currentUser?.role == UserRole.admin
                   ? () => NavigationHelper.to(MaterialPageRoute(builder: (context) => AddEditOrderPage.edit(order: order)))
                   : () => NavigationHelper.to(

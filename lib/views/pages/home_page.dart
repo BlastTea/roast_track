@@ -15,9 +15,9 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: [
-          currentUser?.role == UserRole.admin ? const HomeAdminFragment() : const HomeRoasteryFragment(),
+          const HomeFragment(),
           currentUser?.role == UserRole.admin ? const OrderFragment() : const ClassificationRoasteryFragment(),
-          currentUser?.role == UserRole.admin ? const RoasteryAdminFragment() : const OrderFragment(),
+          currentUser?.role == UserRole.admin ? const RoasteryFragment() : const OrderFragment(),
           if (currentUser?.role == UserRole.roastery) const ResultRoasteryFragment(),
           const ProfileFragment(),
         ][_selectedIndex],

@@ -8,9 +8,23 @@ part of 'models.dart';
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       id: json['id'] as int?,
+      companyId: json['company_id'] as int?,
       username: json['username'] as String?,
       email: json['email'] as String?,
       role: $enumDecodeNullable(_$UserRoleEnumMap, json['role']),
+      name: json['name'] as String?,
+      address: json['address'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+      description: json['description'] as String?,
+      company: json['company'] == null
+          ? null
+          : Company.fromJson(json['company'] as Map<String, dynamic>),
+      orders: (json['orders'] as List<dynamic>?)
+          ?.map((e) => Order.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      roastings: (json['roastings'] as List<dynamic>?)
+          ?.map((e) => Roasting.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -22,15 +36,22 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'company_id': instance.companyId,
       'username': instance.username,
       'email': instance.email,
       'role': _$UserRoleEnumMap[instance.role],
+      'name': instance.name,
+      'address': instance.address,
+      'phone_number': instance.phoneNumber,
+      'description': instance.description,
+      'company': instance.company,
+      'orders': instance.orders,
+      'roastings': instance.roastings,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$UserRoleEnumMap = {
-  UserRole.owner: 'owner',
   UserRole.admin: 'admin',
   UserRole.roastery: 'roastery',
 };
@@ -40,8 +61,14 @@ _$CompanyImpl _$$CompanyImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int?,
       name: json['name'] as String?,
       address: json['address'] as String?,
-      members: (json['members'] as List<dynamic>?)
-          ?.map((e) => Member.fromJson(e as Map<String, dynamic>))
+      users: (json['users'] as List<dynamic>?)
+          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      classificationResults: (json['classification_results'] as List<dynamic>?)
+          ?.map((e) => ClassificationResult.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      orders: (json['orders'] as List<dynamic>?)
+          ?.map((e) => Order.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['created_at'] == null
           ? null
@@ -56,16 +83,24 @@ Map<String, dynamic> _$$CompanyImplToJson(_$CompanyImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'address': instance.address,
-      'members': instance.members,
+      'users': instance.users,
+      'classification_results': instance.classificationResults,
+      'orders': instance.orders,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
-_$MemberImpl _$$MemberImplFromJson(Map<String, dynamic> json) => _$MemberImpl(
+_$ClassificationResultImpl _$$ClassificationResultImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ClassificationResultImpl(
       id: json['id'] as int?,
-      userId: json['user_id'] as int?,
       companyId: json['company_id'] as int?,
-      role: $enumDecodeNullable(_$UserRoleEnumMap, json['role']),
+      result: json['result'] as Map<String, dynamic>?,
+      resultLabel:
+          $enumDecodeNullable(_$ResultLabelTypeEnumMap, json['result_label']),
+      company: json['company'] == null
+          ? null
+          : Company.fromJson(json['company'] as Map<String, dynamic>),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -74,15 +109,24 @@ _$MemberImpl _$$MemberImplFromJson(Map<String, dynamic> json) => _$MemberImpl(
           : DateTime.parse(json['updated_at'] as String),
     );
 
-Map<String, dynamic> _$$MemberImplToJson(_$MemberImpl instance) =>
+Map<String, dynamic> _$$ClassificationResultImplToJson(
+        _$ClassificationResultImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'user_id': instance.userId,
       'company_id': instance.companyId,
-      'role': _$UserRoleEnumMap[instance.role],
+      'result': instance.result,
+      'result_label': _$ResultLabelTypeEnumMap[instance.resultLabel],
+      'company': instance.company,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
+
+const _$ResultLabelTypeEnumMap = {
+  ResultLabelType.green: 'green',
+  ResultLabelType.light: 'light',
+  ResultLabelType.medium: 'medium',
+  ResultLabelType.dark: 'dark',
+};
 
 _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       id: json['id'] as int?,
@@ -96,6 +140,15 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       total: (json['total'] as num?)?.toDouble(),
       status: $enumDecodeNullable(_$OrderStatusEnumMap, json['status']) ??
           OrderStatus.inProgress,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      company: json['company'] == null
+          ? null
+          : Company.fromJson(json['company'] as Map<String, dynamic>),
+      roastings: (json['roastings'] as List<dynamic>?)
+          ?.map((e) => Roasting.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -116,6 +169,9 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'amount': instance.amount,
       'total': instance.total,
       'status': _$OrderStatusEnumMap[instance.status],
+      'user': instance.user,
+      'company': instance.company,
+      'roastings': instance.roastings,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
@@ -131,40 +187,6 @@ const _$OrderStatusEnumMap = {
   OrderStatus.done: 'done',
 };
 
-_$ClassificationRoastingResultImpl _$$ClassificationRoastingResultImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ClassificationRoastingResultImpl(
-      id: json['id'] as int?,
-      roastingId: json['roasting_id'] as int?,
-      result: json['result'] as Map<String, dynamic>?,
-      resultLabel:
-          $enumDecodeNullable(_$ResultLabelTypeEnumMap, json['result_label']),
-      createdAt: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
-      updatedAt: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
-    );
-
-Map<String, dynamic> _$$ClassificationRoastingResultImplToJson(
-        _$ClassificationRoastingResultImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'roasting_id': instance.roastingId,
-      'result': instance.result,
-      'result_label': _$ResultLabelTypeEnumMap[instance.resultLabel],
-      'created_at': instance.createdAt?.toIso8601String(),
-      'updated_at': instance.updatedAt?.toIso8601String(),
-    };
-
-const _$ResultLabelTypeEnumMap = {
-  ResultLabelType.green: 'green',
-  ResultLabelType.light: 'light',
-  ResultLabelType.medium: 'medium',
-  ResultLabelType.dark: 'dark',
-};
-
 _$RoastingImpl _$$RoastingImplFromJson(Map<String, dynamic> json) =>
     _$RoastingImpl(
       id: json['id'] as int?,
@@ -172,6 +194,20 @@ _$RoastingImpl _$$RoastingImplFromJson(Map<String, dynamic> json) =>
       orderId: json['order_id'] as int?,
       unit: $enumDecodeNullable(_$UnitTypeEnumMap, json['unit']),
       timeElapsed: (json['time_elapsed'] as num?)?.toDouble(),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      order: json['order'] == null
+          ? null
+          : Order.fromJson(json['order'] as Map<String, dynamic>),
+      degrees: (json['degrees'] as List<dynamic>?)
+          ?.map((e) => Degree.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      classificationRoastingResults: (json['classification_roasting_results']
+              as List<dynamic>?)
+          ?.map((e) =>
+              ClassificationRoastingResult.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -187,6 +223,10 @@ Map<String, dynamic> _$$RoastingImplToJson(_$RoastingImpl instance) =>
       'order_id': instance.orderId,
       'unit': _$UnitTypeEnumMap[instance.unit],
       'time_elapsed': instance.timeElapsed,
+      'user': instance.user,
+      'order': instance.order,
+      'degrees': instance.degrees,
+      'classification_roasting_results': instance.classificationRoastingResults,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
@@ -203,6 +243,9 @@ _$DegreeImpl _$$DegreeImplFromJson(Map<String, dynamic> json) => _$DegreeImpl(
       envTemp: (json['env_temp'] as num?)?.toDouble(),
       beanTemp: (json['bean_temp'] as num?)?.toDouble(),
       timeElapsed: (json['time_elapsed'] as num?)?.toDouble(),
+      roasting: json['roasting'] == null
+          ? null
+          : Roasting.fromJson(json['roasting'] as Map<String, dynamic>),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -219,6 +262,7 @@ Map<String, dynamic> _$$DegreeImplToJson(_$DegreeImpl instance) =>
       'env_temp': instance.envTemp,
       'bean_temp': instance.beanTemp,
       'time_elapsed': instance.timeElapsed,
+      'roasting': instance.roasting,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
@@ -232,14 +276,17 @@ const _$DegreeTypeEnumMap = {
   DegreeType.drop: 'drop',
 };
 
-_$ClassificationResultImpl _$$ClassificationResultImplFromJson(
+_$ClassificationRoastingResultImpl _$$ClassificationRoastingResultImplFromJson(
         Map<String, dynamic> json) =>
-    _$ClassificationResultImpl(
+    _$ClassificationRoastingResultImpl(
       id: json['id'] as int?,
-      companyId: json['company_id'] as int?,
+      roastingId: json['roasting_id'] as int?,
       result: json['result'] as Map<String, dynamic>?,
       resultLabel:
           $enumDecodeNullable(_$ResultLabelTypeEnumMap, json['result_label']),
+      roasting: json['roasting'] == null
+          ? null
+          : Roasting.fromJson(json['roasting'] as Map<String, dynamic>),
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -248,43 +295,29 @@ _$ClassificationResultImpl _$$ClassificationResultImplFromJson(
           : DateTime.parse(json['updated_at'] as String),
     );
 
-Map<String, dynamic> _$$ClassificationResultImplToJson(
-        _$ClassificationResultImpl instance) =>
+Map<String, dynamic> _$$ClassificationRoastingResultImplToJson(
+        _$ClassificationRoastingResultImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'company_id': instance.companyId,
+      'roasting_id': instance.roastingId,
       'result': instance.result,
       'result_label': _$ResultLabelTypeEnumMap[instance.resultLabel],
+      'roasting': instance.roasting,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
-_$RoasteryImpl _$$RoasteryImplFromJson(Map<String, dynamic> json) =>
-    _$RoasteryImpl(
-      id: json['id'] as int?,
-      userId: json['user_id'] as int?,
-      companyId: json['company_id'] as int?,
-      name: json['name'] as String?,
-      address: json['address'] as String?,
-      phoneNumber: json['phoneNumber'] as String?,
-      description: json['description'] as String?,
-      createdAt: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
-      updatedAt: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
+_$SalesStatisticsImpl _$$SalesStatisticsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SalesStatisticsImpl(
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
+      total: json['total'] as int?,
     );
 
-Map<String, dynamic> _$$RoasteryImplToJson(_$RoasteryImpl instance) =>
+Map<String, dynamic> _$$SalesStatisticsImplToJson(
+        _$SalesStatisticsImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'user_id': instance.userId,
-      'company_id': instance.companyId,
-      'name': instance.name,
-      'address': instance.address,
-      'phoneNumber': instance.phoneNumber,
-      'description': instance.description,
-      'created_at': instance.createdAt?.toIso8601String(),
-      'updated_at': instance.updatedAt?.toIso8601String(),
+      'date': instance.date?.toIso8601String(),
+      'total': instance.total,
     };

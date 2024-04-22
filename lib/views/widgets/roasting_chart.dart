@@ -25,6 +25,7 @@ class _RoastingChartState extends State<RoastingChart> {
           degreeData: widget.degreeData,
           duration: widget.duration,
           labelStyle: Theme.of(context).textTheme.bodySmall!,
+          colorScheme: Theme.of(context).colorScheme,
         ),
       ),
     );
@@ -36,6 +37,7 @@ class RoastingChartPainter extends CustomPainter {
     required this.degreeData,
     required this.duration,
     required this.labelStyle,
+    required this.colorScheme,
   });
 
   final List<Degree>? degreeData;
@@ -43,6 +45,8 @@ class RoastingChartPainter extends CustomPainter {
   final Duration duration;
 
   final TextStyle labelStyle;
+
+  final ColorScheme colorScheme;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -59,7 +63,7 @@ class RoastingChartPainter extends CustomPainter {
 
     // Paint for grid and label
     final gridPaint = Paint()
-      ..color = Colors.grey.shade800
+      ..color = colorScheme.onSurface.withOpacity(0.3)
       ..strokeWidth = 1;
 
     final textPainter = TextPainter(textDirection: TextDirection.ltr);
@@ -102,7 +106,7 @@ class RoastingChartPainter extends CustomPainter {
     // Draw degree data
     if (degreeData?.isNotEmpty ?? false) {
       var pathPaint = Paint()
-        ..color = Colors.brown
+        ..color = colorScheme.primary
         ..strokeWidth = 2
         ..style = PaintingStyle.stroke;
       var path = Path();

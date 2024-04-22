@@ -30,3 +30,9 @@ class SetCurrentOrder extends OrderEvent {
 }
 
 class SaveOrderPressed extends OrderEvent {}
+
+class DeleteOrderPressed extends OrderEvent {
+  DeleteOrderPressed({required this.value});
+
+  final Order value;
+}

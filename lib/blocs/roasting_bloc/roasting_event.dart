@@ -11,11 +11,7 @@ class SetRoastingState extends RoastingEvent {
 
 class SetRoastingToInitial extends RoastingEvent {}
 
-class InitializeRoastingData extends RoastingEvent {
-  InitializeRoastingData({this.animationController});
-
-  final AnimationController? animationController;
-}
+class InitializeRoastingData extends RoastingEvent {}
 
 class ToggleRoastingTimer extends RoastingEvent {}
 

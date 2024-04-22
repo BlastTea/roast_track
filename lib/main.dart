@@ -34,10 +34,11 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   static AuthenticationBloc authenticationBloc = AuthenticationBloc();
+  static HomeBloc homeBloc = HomeBloc();
   static OrderBloc orderBloc = OrderBloc();
-  static CompanyBloc companyBloc = CompanyBloc();
   static RoastingBloc roastingBloc = RoastingBloc();
   static RoastingResultBloc roastingResultBloc = RoastingResultBloc();
+  static RoasteryBloc roasteryBloc = RoasteryBloc();
 
   @override
   Widget build(BuildContext context) => MWidgetDynamicColorBuilder(
@@ -70,10 +71,11 @@ class MyApp extends StatelessWidget {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => authenticationBloc),
+              BlocProvider(create: (context) => homeBloc),
               BlocProvider(create: (context) => orderBloc),
-              BlocProvider(create: (context) => companyBloc),
               BlocProvider(create: (context) => roastingBloc),
               BlocProvider(create: (context) => roastingResultBloc),
+              BlocProvider(create: (context) => roasteryBloc),
             ],
             child: MaterialApp(
               theme: theme.copyWith(
@@ -113,7 +115,7 @@ class MyApp extends StatelessWidget {
               title: appName,
               navigatorKey: navigatorKey,
               scaffoldMessengerKey: scaffoldMessengerKey,
-              home: currentUser != null ? const CompanyPage.select() : const SignInPage(),
+              home: currentUser != null ? const HomePage() : const SignInPage(),
             ),
           ),
         ),

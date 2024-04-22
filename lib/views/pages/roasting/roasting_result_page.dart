@@ -14,27 +14,56 @@ class RoastingResultPage extends StatelessWidget {
               ),
               body: Column(
                 children: [
-                  Expanded(
-                    child: SfCartesianChart(
-                      trackballBehavior: TrackballBehavior(
-                        enable: true,
-                      ),
-                      series: [
-                        LineSeries<Degree, double>(
-                          dataSource: stateRoastingResult.degrees,
-                          xValueMapper: (datum, index) => datum.timeElapsed! / 1000,
-                          yValueMapper: (datum, index) => datum.beanTemp,
-                        ),
-                      ],
-                    ),
-                  ),
                   SizedBox(
-                    height: 20.0 + 32.0,
+                    height: 40.0 + 16.0,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                       child: Row(
                         children: List.generate(
-                          1,
+                          3,
+                          (index) => Flexible(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    controller: TextEditingController(
+                                        text: [
+                                      '${stateRoastingResult.degrees.isEmpty ? '0.0' : stateRoastingResult.degrees.last.envTemp ?? '0.0'}',
+                                      '${stateRoastingResult.degrees.isEmpty ? '0.0' : stateRoastingResult.degrees.last.beanTemp ?? '0.0'}',
+                                      '0.0',
+                                    ][index]),
+                                    decoration: InputDecoration(
+                                      labelText: [
+                                        'ET',
+                                        'BT',
+                                        'Δ BT',
+                                      ][index],
+                                      contentPadding: const EdgeInsets.fromLTRB(20.0, 4.0, 4.0, 4.0),
+                                    ),
+                                    readOnly: true,
+                                  ),
+                                ),
+                                if (index < 2) const SizedBox(width: 6.0),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: RoastingResultChart(
+                      roasting: stateRoastingResult.roasting,
+                      degrees: stateRoastingResult.degrees,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0 + 32.0 + 16.0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      child: Row(
+                        children: List.generate(
+                          2,
                           (index) => Flexible(
                             fit: FlexFit.tight,
                             child: Row(
@@ -48,7 +77,7 @@ class RoastingResultPage extends StatelessWidget {
                                     child: Text(['Simpan', 'Ambil gambar'][index]),
                                   ),
                                 ),
-                                // if (index < 1) const SizedBox(width: 6.0)
+                                if (index < 1) const SizedBox(width: 6.0)
                               ],
                             ),
                           ),
