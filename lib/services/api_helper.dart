@@ -143,6 +143,9 @@ class ApiHelper {
     MyApp.homeBloc.add(SetHomeToInitial());
     MyApp.orderBloc.add(SetOrderToInitial());
     MyApp.roasteryBloc.add(SetRoasteryToInitial());
+    MyApp.roastingBloc.add(SetRoastingToInitial());
+    MyApp.roastingResultBloc.add(SetRoastingResultToInitial());
+    MyApp.resultBloc.add(SetResultToInitial());
 
     SharedPreferences sharedPref = await SharedPreferences.getInstance();
 

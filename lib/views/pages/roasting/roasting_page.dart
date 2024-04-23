@@ -1,7 +1,12 @@
 part of '../pages.dart';
 
 class RoastingPage extends StatefulWidget {
-  const RoastingPage({super.key});
+  const RoastingPage({
+    super.key,
+    required this.orderId,
+  });
+
+  final int orderId;
 
   @override
   State<RoastingPage> createState() => _RoastingPageState();
@@ -11,7 +16,7 @@ class _RoastingPageState extends State<RoastingPage> {
   @override
   void initState() {
     super.initState();
-    MyApp.roastingBloc.add(InitializeRoastingData());
+    MyApp.roastingBloc.add(InitializeRoastingData(orderId: widget.orderId));
   }
 
   ButtonStyle? _getEffectiveButtonStyle({required int index, required DegreeType? type}) => index >= (type?.value ?? 99)

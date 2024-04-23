@@ -25,7 +25,10 @@ class RoasteryBloc extends Bloc<RoasteryEvent, RoasteryState> {
     });
 
     on<InitializeRoasteryData>((event, emit) async {
-      if (_isInitializing) return;
+      if (_isInitializing) {
+        event.completer?.complete(false);
+        return;
+      }
 
       _isInitializing = true;
 

@@ -21,7 +21,7 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
     });
 
     on<InitializeRoastingData>((event, emit) {
-      _currentRoasting = Roasting();
+      _currentRoasting = Roasting(orderId: event.orderId);
 
       _degrees.clear();
 
@@ -51,6 +51,7 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
             roasting: kDebugMode
                 ? Roasting(
                     roasteryId: currentUser?.id,
+                    orderId: _currentRoasting.orderId,
                     unit: UnitType.celcius,
                     timeElapsed: 110000,
                   )

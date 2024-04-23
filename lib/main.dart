@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
   static RoastingBloc roastingBloc = RoastingBloc();
   static RoastingResultBloc roastingResultBloc = RoastingResultBloc();
   static RoasteryBloc roasteryBloc = RoasteryBloc();
+  static ResultBloc resultBloc = ResultBloc();
 
   @override
   Widget build(BuildContext context) => MWidgetDynamicColorBuilder(
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
               BlocProvider(create: (context) => roastingBloc),
               BlocProvider(create: (context) => roastingResultBloc),
               BlocProvider(create: (context) => roasteryBloc),
+              BlocProvider(create: (context) => resultBloc),
             ],
             child: MaterialApp(
               theme: theme.copyWith(

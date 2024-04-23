@@ -15,7 +15,6 @@ class RoasteryFragment extends StatelessWidget {
             ListTile(
                 leading: const Icon(Icons.person),
                 title: Text(roastery.username ?? '?'),
-                subtitle: Text(roastery.role?.text ?? '?'),
                 trailing: IconButton.outlined(
                   onPressed: () => MyApp.roasteryBloc.add(DeleteRoasteryPressed(value: roastery)),
                   icon: const Icon(Icons.delete),

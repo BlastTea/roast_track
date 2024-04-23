@@ -36,3 +36,7 @@ part 'roastery_bloc/roastery_state.dart';
 part 'home_bloc/home_bloc.dart';
 part 'home_bloc/home_event.dart';
 part 'home_bloc/home_state.dart';
+
+part 'result_bloc/result_bloc.dart';
+part 'result_bloc/result_event.dart';
+part 'result_bloc/result_state.dart';

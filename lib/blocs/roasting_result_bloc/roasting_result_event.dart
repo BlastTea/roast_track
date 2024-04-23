@@ -21,4 +21,12 @@ class InitializeRoastingResultData extends RoastingResultEvent {
   final List<Degree> degrees;
 }
 
-class TakePicturePressed extends RoastingResultEvent {}
+class SaveRoastingResultPressed extends RoastingResultEvent {}
+
+class TakeRoastingResultPicturePressed extends RoastingResultEvent {}
+
+class SaveRoastingClassificationResultPressed extends RoastingResultEvent {
+  SaveRoastingClassificationResultPressed({required this.index});
+
+  final int index;
+}

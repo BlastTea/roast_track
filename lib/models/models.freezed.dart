@@ -754,8 +754,10 @@ mixin _$ClassificationResult {
   int? get companyId => throw _privateConstructorUsedError;
   @JsonKey(name: 'company_id')
   set companyId(int? value) => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get result => throw _privateConstructorUsedError;
-  set result(Map<String, dynamic>? value) => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  List<dynamic>? get result => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  set result(List<dynamic>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'result_label')
   ResultLabelType? get resultLabel => throw _privateConstructorUsedError;
   @JsonKey(name: 'result_label')
@@ -786,7 +788,8 @@ abstract class $ClassificationResultCopyWith<$Res> {
   $Res call(
       {int? id,
       @JsonKey(name: 'company_id') int? companyId,
-      Map<String, dynamic>? result,
+      @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+      List<dynamic>? result,
       @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
       Company? company,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -829,7 +832,7 @@ class _$ClassificationResultCopyWithImpl<$Res,
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as List<dynamic>?,
       resultLabel: freezed == resultLabel
           ? _value.resultLabel
           : resultLabel // ignore: cast_nullable_to_non_nullable
@@ -873,7 +876,8 @@ abstract class _$$ClassificationResultImplCopyWith<$Res>
   $Res call(
       {int? id,
       @JsonKey(name: 'company_id') int? companyId,
-      Map<String, dynamic>? result,
+      @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+      List<dynamic>? result,
       @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
       Company? company,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -914,7 +918,7 @@ class __$$ClassificationResultImplCopyWithImpl<$Res>
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as List<dynamic>?,
       resultLabel: freezed == resultLabel
           ? _value.resultLabel
           : resultLabel // ignore: cast_nullable_to_non_nullable
@@ -941,7 +945,7 @@ class _$ClassificationResultImpl implements _ClassificationResult {
   _$ClassificationResultImpl(
       {this.id,
       @JsonKey(name: 'company_id') this.companyId,
-      this.result,
+      @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString) this.result,
       @JsonKey(name: 'result_label') this.resultLabel,
       this.company,
       @JsonKey(name: 'created_at') this.createdAt,
@@ -956,7 +960,8 @@ class _$ClassificationResultImpl implements _ClassificationResult {
   @JsonKey(name: 'company_id')
   int? companyId;
   @override
-  Map<String, dynamic>? result;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  List<dynamic>? result;
   @override
   @JsonKey(name: 'result_label')
   ResultLabelType? resultLabel;
@@ -994,7 +999,8 @@ abstract class _ClassificationResult implements ClassificationResult {
   factory _ClassificationResult(
           {int? id,
           @JsonKey(name: 'company_id') int? companyId,
-          Map<String, dynamic>? result,
+          @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+          List<dynamic>? result,
           @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
           Company? company,
           @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -1013,8 +1019,10 @@ abstract class _ClassificationResult implements ClassificationResult {
   @JsonKey(name: 'company_id')
   set companyId(int? value);
   @override
-  Map<String, dynamic>? get result;
-  set result(Map<String, dynamic>? value);
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  List<dynamic>? get result;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  set result(List<dynamic>? value);
   @override
   @JsonKey(name: 'result_label')
   ResultLabelType? get resultLabel;
@@ -1949,9 +1957,9 @@ mixin _$Degree {
   set roastingId(int? value) => throw _privateConstructorUsedError;
   DegreeType? get type => throw _privateConstructorUsedError;
   set type(DegreeType? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'env_temp')
+  @JsonKey(name: 'env_temp', includeIfNull: false)
   double? get envTemp => throw _privateConstructorUsedError;
-  @JsonKey(name: 'env_temp')
+  @JsonKey(name: 'env_temp', includeIfNull: false)
   set envTemp(double? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'bean_temp')
   double? get beanTemp => throw _privateConstructorUsedError;
@@ -1986,7 +1994,7 @@ abstract class $DegreeCopyWith<$Res> {
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
       DegreeType? type,
-      @JsonKey(name: 'env_temp') double? envTemp,
+      @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
       @JsonKey(name: 'bean_temp') double? beanTemp,
       @JsonKey(name: 'time_elapsed') double? timeElapsed,
       Roasting? roasting,
@@ -2083,7 +2091,7 @@ abstract class _$$DegreeImplCopyWith<$Res> implements $DegreeCopyWith<$Res> {
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
       DegreeType? type,
-      @JsonKey(name: 'env_temp') double? envTemp,
+      @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
       @JsonKey(name: 'bean_temp') double? beanTemp,
       @JsonKey(name: 'time_elapsed') double? timeElapsed,
       Roasting? roasting,
@@ -2163,7 +2171,7 @@ class _$DegreeImpl implements _Degree {
       {this.id,
       @JsonKey(name: 'roasting_id') this.roastingId,
       this.type,
-      @JsonKey(name: 'env_temp') this.envTemp,
+      @JsonKey(name: 'env_temp', includeIfNull: false) this.envTemp,
       @JsonKey(name: 'bean_temp') this.beanTemp,
       @JsonKey(name: 'time_elapsed') this.timeElapsed,
       this.roasting,
@@ -2181,7 +2189,7 @@ class _$DegreeImpl implements _Degree {
   @override
   DegreeType? type;
   @override
-  @JsonKey(name: 'env_temp')
+  @JsonKey(name: 'env_temp', includeIfNull: false)
   double? envTemp;
   @override
   @JsonKey(name: 'bean_temp')
@@ -2222,7 +2230,7 @@ abstract class _Degree implements Degree {
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
       DegreeType? type,
-      @JsonKey(name: 'env_temp') double? envTemp,
+      @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
       @JsonKey(name: 'bean_temp') double? beanTemp,
       @JsonKey(name: 'time_elapsed') double? timeElapsed,
       Roasting? roasting,
@@ -2243,9 +2251,9 @@ abstract class _Degree implements Degree {
   DegreeType? get type;
   set type(DegreeType? value);
   @override
-  @JsonKey(name: 'env_temp')
+  @JsonKey(name: 'env_temp', includeIfNull: false)
   double? get envTemp;
-  @JsonKey(name: 'env_temp')
+  @JsonKey(name: 'env_temp', includeIfNull: false)
   set envTemp(double? value);
   @override
   @JsonKey(name: 'bean_temp')
@@ -2289,8 +2297,10 @@ mixin _$ClassificationRoastingResult {
   int? get roastingId => throw _privateConstructorUsedError;
   @JsonKey(name: 'roasting_id')
   set roastingId(int? value) => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get result => throw _privateConstructorUsedError;
-  set result(Map<String, dynamic>? value) => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  List<dynamic>? get result => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  set result(List<dynamic>? value) => throw _privateConstructorUsedError;
   @JsonKey(name: 'result_label')
   ResultLabelType? get resultLabel => throw _privateConstructorUsedError;
   @JsonKey(name: 'result_label')
@@ -2323,7 +2333,8 @@ abstract class $ClassificationRoastingResultCopyWith<$Res> {
   $Res call(
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
-      Map<String, dynamic>? result,
+      @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+      List<dynamic>? result,
       @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
       Roasting? roasting,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -2366,7 +2377,7 @@ class _$ClassificationRoastingResultCopyWithImpl<$Res,
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as List<dynamic>?,
       resultLabel: freezed == resultLabel
           ? _value.resultLabel
           : resultLabel // ignore: cast_nullable_to_non_nullable
@@ -2411,7 +2422,8 @@ abstract class _$$ClassificationRoastingResultImplCopyWith<$Res>
   $Res call(
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
-      Map<String, dynamic>? result,
+      @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+      List<dynamic>? result,
       @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
       Roasting? roasting,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -2454,7 +2466,7 @@ class __$$ClassificationRoastingResultImplCopyWithImpl<$Res>
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as List<dynamic>?,
       resultLabel: freezed == resultLabel
           ? _value.resultLabel
           : resultLabel // ignore: cast_nullable_to_non_nullable
@@ -2482,7 +2494,7 @@ class _$ClassificationRoastingResultImpl
   _$ClassificationRoastingResultImpl(
       {this.id,
       @JsonKey(name: 'roasting_id') this.roastingId,
-      this.result,
+      @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString) this.result,
       @JsonKey(name: 'result_label') this.resultLabel,
       this.roasting,
       @JsonKey(name: 'created_at') this.createdAt,
@@ -2498,7 +2510,8 @@ class _$ClassificationRoastingResultImpl
   @JsonKey(name: 'roasting_id')
   int? roastingId;
   @override
-  Map<String, dynamic>? result;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  List<dynamic>? result;
   @override
   @JsonKey(name: 'result_label')
   ResultLabelType? resultLabel;
@@ -2537,7 +2550,8 @@ abstract class _ClassificationRoastingResult
   factory _ClassificationRoastingResult(
           {int? id,
           @JsonKey(name: 'roasting_id') int? roastingId,
-          Map<String, dynamic>? result,
+          @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+          List<dynamic>? result,
           @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
           Roasting? roasting,
           @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -2556,8 +2570,10 @@ abstract class _ClassificationRoastingResult
   @JsonKey(name: 'roasting_id')
   set roastingId(int? value);
   @override
-  Map<String, dynamic>? get result;
-  set result(Map<String, dynamic>? value);
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  List<dynamic>? get result;
+  @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString)
+  set result(List<dynamic>? value);
   @override
   @JsonKey(name: 'result_label')
   ResultLabelType? get resultLabel;

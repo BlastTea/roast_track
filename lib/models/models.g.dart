@@ -95,7 +95,7 @@ _$ClassificationResultImpl _$$ClassificationResultImplFromJson(
     _$ClassificationResultImpl(
       id: json['id'] as int?,
       companyId: json['company_id'] as int?,
-      result: json['result'] as Map<String, dynamic>?,
+      result: _jsonFromString(json['result']),
       resultLabel:
           $enumDecodeNullable(_$ResultLabelTypeEnumMap, json['result_label']),
       company: json['company'] == null
@@ -114,7 +114,7 @@ Map<String, dynamic> _$$ClassificationResultImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'company_id': instance.companyId,
-      'result': instance.result,
+      'result': _jsonToString(instance.result),
       'result_label': _$ResultLabelTypeEnumMap[instance.resultLabel],
       'company': instance.company,
       'created_at': instance.createdAt?.toIso8601String(),
@@ -254,18 +254,27 @@ _$DegreeImpl _$$DegreeImplFromJson(Map<String, dynamic> json) => _$DegreeImpl(
           : DateTime.parse(json['updated_at'] as String),
     );
 
-Map<String, dynamic> _$$DegreeImplToJson(_$DegreeImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'roasting_id': instance.roastingId,
-      'type': _$DegreeTypeEnumMap[instance.type],
-      'env_temp': instance.envTemp,
-      'bean_temp': instance.beanTemp,
-      'time_elapsed': instance.timeElapsed,
-      'roasting': instance.roasting,
-      'created_at': instance.createdAt?.toIso8601String(),
-      'updated_at': instance.updatedAt?.toIso8601String(),
-    };
+Map<String, dynamic> _$$DegreeImplToJson(_$DegreeImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'roasting_id': instance.roastingId,
+    'type': _$DegreeTypeEnumMap[instance.type],
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('env_temp', instance.envTemp);
+  val['bean_temp'] = instance.beanTemp;
+  val['time_elapsed'] = instance.timeElapsed;
+  val['roasting'] = instance.roasting;
+  val['created_at'] = instance.createdAt?.toIso8601String();
+  val['updated_at'] = instance.updatedAt?.toIso8601String();
+  return val;
+}
 
 const _$DegreeTypeEnumMap = {
   DegreeType.charge: 'charge',
@@ -281,7 +290,7 @@ _$ClassificationRoastingResultImpl _$$ClassificationRoastingResultImplFromJson(
     _$ClassificationRoastingResultImpl(
       id: json['id'] as int?,
       roastingId: json['roasting_id'] as int?,
-      result: json['result'] as Map<String, dynamic>?,
+      result: _jsonFromString(json['result']),
       resultLabel:
           $enumDecodeNullable(_$ResultLabelTypeEnumMap, json['result_label']),
       roasting: json['roasting'] == null
@@ -300,7 +309,7 @@ Map<String, dynamic> _$$ClassificationRoastingResultImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'roasting_id': instance.roastingId,
-      'result': instance.result,
+      'result': _jsonToString(instance.result),
       'result_label': _$ResultLabelTypeEnumMap[instance.resultLabel],
       'roasting': instance.roasting,
       'created_at': instance.createdAt?.toIso8601String(),

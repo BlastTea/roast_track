@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m_widget/m_widget.dart';
 import 'package:roast_track/blocs/blocs.dart';
@@ -18,5 +16,5 @@ part 'order_fragment.dart';
 part 'roastery_fragment.dart';
 part 'profile_fragment.dart';
 
-part 'roastery/classification_roastery_fragment.dart';
-part 'roastery/result_roastery_fragment.dart';
+part 'classification_fragment.dart';
+part 'result_fragment.dart';

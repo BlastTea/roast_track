@@ -1,7 +1,7 @@
-part of '../fragments.dart';
+part of 'fragments.dart';
 
-class ClassificationRoasteryFragment extends StatelessWidget {
-  const ClassificationRoasteryFragment({super.key});
+class ClassificationFragment extends StatelessWidget {
+  const ClassificationFragment({super.key});
 
   @override
   Widget build(BuildContext context) => Column(

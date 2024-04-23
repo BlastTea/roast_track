@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:m_widget/m_widget.dart';
 
 part 'models.freezed.dart';
 part 'models.g.dart';
+
+List<dynamic>? _jsonFromString(dynamic data) => data == '' ? null : json.decode(jsonToCorrectStringFormat(data));
+
+String? _jsonToString(dynamic json) => json.toString();
 
 @unfreezed
 class User with _$User {
@@ -46,7 +53,7 @@ class ClassificationResult with _$ClassificationResult {
   factory ClassificationResult({
     int? id,
     @JsonKey(name: 'company_id') int? companyId,
-    Map<String, dynamic>? result,
+    @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString) List<dynamic>? result,
     @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
     Company? company,
     @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -104,7 +111,7 @@ class Degree with _$Degree {
     int? id,
     @JsonKey(name: 'roasting_id') int? roastingId,
     DegreeType? type,
-    @JsonKey(name: 'env_temp') double? envTemp,
+    @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
     @JsonKey(name: 'bean_temp') double? beanTemp,
     @JsonKey(name: 'time_elapsed') double? timeElapsed,
     Roasting? roasting,
@@ -120,7 +127,7 @@ class ClassificationRoastingResult with _$ClassificationRoastingResult {
   factory ClassificationRoastingResult({
     int? id,
     @JsonKey(name: 'roasting_id') int? roastingId,
-    Map<String, dynamic>? result,
+    @JsonKey(fromJson: _jsonFromString, toJson: _jsonToString) List<dynamic>? result,
     @JsonKey(name: 'result_label') ResultLabelType? resultLabel,
     Roasting? roasting,
     @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -212,6 +219,14 @@ enum ResultLabelType {
         light => 'Light',
         medium => 'Medium',
         dark => 'Dark',
+      };
+
+  static ResultLabelType? fromString(String value) => switch (value) {
+        'Green' => green,
+        'Light' => light,
+        'Medium' => medium,
+        'Dark' => dark,
+        _ => null,
       };
 }
 

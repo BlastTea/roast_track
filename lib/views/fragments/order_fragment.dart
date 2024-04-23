@@ -23,7 +23,7 @@ class OrderFragment extends StatelessWidget {
                       onPressed: () => NavigationHelper.to(
                         MaterialPageRoute(
                           fullscreenDialog: true,
-                          builder: (context) => const RoastingPage(),
+                          builder: (context) => RoastingPage(orderId: order.id!),
                         ),
                       ),
                       icon: const Icon(Icons.play_arrow_rounded),
@@ -41,7 +41,7 @@ class OrderFragment extends StatelessWidget {
                   : () => NavigationHelper.to(
                         MaterialPageRoute(
                           fullscreenDialog: true,
-                          builder: (context) => const RoastingPage(),
+                          builder: (context) => RoastingPage(orderId: order.id!),
                         ),
                       ),
             ),

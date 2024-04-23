@@ -86,56 +86,56 @@ class _AddEditRoasteryPageState extends State<AddEditRoasteryPage> {
                       child: const Text('Generate password'),
                     ),
                   ),
-                  const SizedBox(height: 8.0),
-                  TextField(
-                    focusNode: stateRoastery.focusNodeName,
-                    controller: stateRoastery.textControllerName,
-                    decoration: const InputDecoration(
-                      labelText: 'Nama',
-                    ),
-                    maxLength: 100,
-                    buildCounter: (context, {required currentLength, required isFocused, required maxLength}) => Container(),
-                    textInputAction: TextInputAction.next,
-                  ),
-                  const SizedBox(height: 8.0),
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxHeight: kMaximumDescriptionHeight,
-                    ),
-                    child: TextField(
-                      controller: stateRoastery.textControllerAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Alamat',
-                      ),
-                      maxLength: 255,
-                      maxLines: null,
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  TextField(
-                    controller: stateRoastery.textControllerPhoneNumber,
-                    decoration: const InputDecoration(
-                      labelText: 'Nomor telepon',
-                    ),
-                    maxLength: 13,
-                    inputFormatters: [textFormatterDigitsOnly],
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                  ),
-                  const SizedBox(height: 16.0),
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxHeight: kMaximumDescriptionHeight,
-                    ),
-                    child: TextField(
-                      controller: stateRoastery.textControllerDescription,
-                      decoration: const InputDecoration(
-                        labelText: 'Deskripsi',
-                      ),
-                      maxLength: 255,
-                      maxLines: null,
-                    ),
-                  ),
+                  // const SizedBox(height: 8.0),
+                  // TextField(
+                  //   focusNode: stateRoastery.focusNodeName,
+                  //   controller: stateRoastery.textControllerName,
+                  //   decoration: const InputDecoration(
+                  //     labelText: 'Nama',
+                  //   ),
+                  //   maxLength: 100,
+                  //   buildCounter: (context, {required currentLength, required isFocused, required maxLength}) => Container(),
+                  //   textInputAction: TextInputAction.next,
+                  // ),
+                  // const SizedBox(height: 8.0),
+                  // ConstrainedBox(
+                  //   constraints: const BoxConstraints(
+                  //     maxHeight: kMaximumDescriptionHeight,
+                  //   ),
+                  //   child: TextField(
+                  //     controller: stateRoastery.textControllerAddress,
+                  //     decoration: const InputDecoration(
+                  //       labelText: 'Alamat',
+                  //     ),
+                  //     maxLength: 255,
+                  //     maxLines: null,
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 16.0),
+                  // TextField(
+                  //   controller: stateRoastery.textControllerPhoneNumber,
+                  //   decoration: const InputDecoration(
+                  //     labelText: 'Nomor telepon',
+                  //   ),
+                  //   maxLength: 13,
+                  //   inputFormatters: [textFormatterDigitsOnly],
+                  //   keyboardType: TextInputType.number,
+                  //   textInputAction: TextInputAction.next,
+                  // ),
+                  // const SizedBox(height: 16.0),
+                  // ConstrainedBox(
+                  //   constraints: const BoxConstraints(
+                  //     maxHeight: kMaximumDescriptionHeight,
+                  //   ),
+                  //   child: TextField(
+                  //     controller: stateRoastery.textControllerDescription,
+                  //     decoration: const InputDecoration(
+                  //       labelText: 'Deskripsi',
+                  //     ),
+                  //     maxLength: 255,
+                  //     maxLines: null,
+                  //   ),
+                  // ),
                   const SizedBox(height: kBottomFabPadding),
                 ],
               ),

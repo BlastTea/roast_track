@@ -11,7 +11,11 @@ class SetRoastingState extends RoastingEvent {
 
 class SetRoastingToInitial extends RoastingEvent {}
 
-class InitializeRoastingData extends RoastingEvent {}
+class InitializeRoastingData extends RoastingEvent {
+  InitializeRoastingData({required this.orderId});
+
+  final int orderId;
+}
 
 class ToggleRoastingTimer extends RoastingEvent {}
 
