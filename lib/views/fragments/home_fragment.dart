@@ -19,6 +19,9 @@ class HomeFragment extends StatelessWidget {
               height: 150.0,
               borderRadius: BorderRadius.circular(75.0),
               image: const AssetImage('assets/images/logo.png'),
+              extendedAppBar: AppBar(
+                title: const Text(appName),
+              ),
             ),
           ),
           const SizedBox(height: 32.0),
@@ -94,11 +97,15 @@ class HomeFragment extends StatelessWidget {
                       labelPlacement: LabelPlacement.onTicks,
                     ),
                     trackballBehavior: TrackballBehavior(
-                      activationMode: ActivationMode.singleTap,
                       enable: true,
-                      tooltipSettings: const InteractiveTooltip(format: 'point.y\npoint.x'),
-                      markerSettings: const TrackballMarkerSettings(
-                        markerVisibility: TrackballVisibilityMode.visible,
+                      activationMode: ActivationMode.singleTap,
+                      builder: (context, trackballDetails) => Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surfaceVariant,
+                          borderRadius: BorderRadius.circular(kShapeSmall),
+                        ),
+                        child: Text('Rp ${(trackballDetails.point!.y as int).toThousandFormat()}\n${trackballDetails.point?.x}'),
                       ),
                     ),
                     title: ChartTitle(

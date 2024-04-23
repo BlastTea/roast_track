@@ -5,6 +5,15 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     on<SetResultState>((event, emit) => emit(event.state ?? _resultDataLoaded));
 
     on<SetResultToInitial>((event, emit) {
+      _dateTimeRange = DateTimeRange(start: DateTime.now(), end: DateTime.now().copyWith(hour: 23, minute: 59, second: 59));
+
+      _isInitializing = false;
+      _isLoading = false;
+
+      _orders.clear();
+
+      _classificationResults.clear();
+
       emit(ResultInitial());
     });
 

@@ -15,6 +15,7 @@ class RoastingResultBloc extends Bloc<RoastingResultEvent, RoastingResultState> 
       _roasting = event.roasting;
       _degrees = event.degrees;
       _classificationResults.clear();
+      if (event.classificationResults != null) _classificationResults = event.classificationResults!;
       emit(_roastingResultDataLoaded);
     });
 
@@ -106,7 +107,7 @@ class RoastingResultBloc extends Bloc<RoastingResultEvent, RoastingResultState> 
 
   late List<Degree> _degrees;
 
-  final List<ClassificationRoastingResult> _classificationResults = [];
+  List<ClassificationRoastingResult> _classificationResults = [];
 
   RoastingResultDataLoaded get _roastingResultDataLoaded => RoastingResultDataLoaded(
         draggableScrollableController: _draggableScrollableController,

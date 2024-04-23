@@ -1,7 +1,39 @@
 part of '../pages.dart';
 
-class RoastingResultPage extends StatelessWidget {
-  const RoastingResultPage({super.key});
+class RoastingResultPage extends StatefulWidget {
+  const RoastingResultPage({
+    super.key,
+    required this.roasting,
+    required this.degrees,
+  })  : classificationResults = null,
+        readOnly = false;
+
+  const RoastingResultPage.readOnly({
+    super.key,
+    required this.roasting,
+    required this.degrees,
+    required this.classificationResults,
+  }) : readOnly = true;
+
+  final Roasting roasting;
+  final List<Degree> degrees;
+  final List<ClassificationRoastingResult>? classificationResults;
+  final bool readOnly;
+
+  @override
+  State<RoastingResultPage> createState() => _RoastingResultPageState();
+}
+
+class _RoastingResultPageState extends State<RoastingResultPage> {
+  @override
+  void initState() {
+    super.initState();
+    MyApp.roastingResultBloc.add(InitializeRoastingResultData(
+      roasting: widget.roasting,
+      degrees: widget.degrees,
+      classificationResults: widget.classificationResults,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) => BlocBuilder<RoastingResultBloc, RoastingResultState>(
@@ -59,34 +91,35 @@ class RoastingResultPage extends StatelessWidget {
                           degrees: stateRoastingResult.degrees,
                         ),
                       ),
-                      SizedBox(
-                        height: 20.0 + 32.0 + 16.0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                          child: Row(
-                            children: List.generate(
-                              2,
-                              (index) => Flexible(
-                                fit: FlexFit.tight,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: FilledButton.tonal(
-                                        onPressed: [
-                                          stateRoastingResult.roasting.id != null && !kDebugMode ? null : () => MyApp.roastingResultBloc.add(SaveRoastingResultPressed()),
-                                          stateRoastingResult.roasting.id == null && !kDebugMode ? null : () => MyApp.roastingResultBloc.add(TakeRoastingResultPicturePressed()),
-                                        ][index],
-                                        child: Text(['Simpan', 'Ambil gambar'][index]),
+                      if (!widget.readOnly)
+                        SizedBox(
+                          height: 20.0 + 32.0 + 16.0,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                            child: Row(
+                              children: List.generate(
+                                2,
+                                (index) => Flexible(
+                                  fit: FlexFit.tight,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: FilledButton.tonal(
+                                          onPressed: [
+                                            stateRoastingResult.roasting.id != null && !kDebugMode ? null : () => MyApp.roastingResultBloc.add(SaveRoastingResultPressed()),
+                                            stateRoastingResult.roasting.id == null && !kDebugMode ? null : () => MyApp.roastingResultBloc.add(TakeRoastingResultPicturePressed()),
+                                          ][index],
+                                          child: Text(['Simpan', 'Ambil gambar'][index]),
+                                        ),
                                       ),
-                                    ),
-                                    if (index < 1) const SizedBox(width: 6.0)
-                                  ],
+                                      if (index < 1) const SizedBox(width: 6.0)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
                       const SizedBox(height: 48.0),
                     ],
                   ),
@@ -148,10 +181,12 @@ class RoastingResultPage extends StatelessWidget {
                                       ListTile(
                                         title: Text(result.resultLabel?.text ?? '?'),
                                         subtitle: Text(result.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'),
-                                        trailing: FilledButton(
-                                          onPressed: result.id != null ? null : () => MyApp.roastingResultBloc.add(SaveRoastingClassificationResultPressed(index: index)),
-                                          child: const Text('Simpan'),
-                                        ),
+                                        trailing: widget.readOnly
+                                            ? null
+                                            : FilledButton(
+                                                onPressed: result.id != null ? null : () => MyApp.roastingResultBloc.add(SaveRoastingClassificationResultPressed(index: index)),
+                                                child: const Text('Simpan'),
+                                              ),
                                       ),
                                       const Divider(),
                                     ],

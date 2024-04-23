@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m_widget/m_widget.dart';
-import 'package:roast_track/main.dart';
 import 'package:roast_track/models/models.dart';
 import 'package:roast_track/services/services.dart';
 import 'package:roast_track/utils/utils.dart';
@@ -40,3 +39,15 @@ part 'home_bloc/home_state.dart';
 part 'result_bloc/result_bloc.dart';
 part 'result_bloc/result_event.dart';
 part 'result_bloc/result_state.dart';
+
+part 'classification_bloc/classification_bloc.dart';
+part 'classification_bloc/classification_event.dart';
+part 'classification_bloc/classification_state.dart';
+
+part 'profile_bloc/profile_bloc.dart';
+part 'profile_bloc/profile_event.dart';
+part 'profile_bloc/profile_state.dart';
+
+part 'change_password_bloc/change_password_bloc.dart';
+part 'change_password_bloc/change_password_event.dart';
+part 'change_password_bloc/change_password_state.dart';

@@ -57,10 +57,10 @@ class RoasteryBloc extends Bloc<RoasteryEvent, RoasteryState> {
 
       _textControllerUsername.text = _currentRoastery.username ?? '';
       _textControllerEmail.text = _currentRoastery.email ?? '';
-      _textControllerName.text = _currentRoastery.name ?? '';
-      _textControllerAddress.text = _currentRoastery.address ?? '';
-      _textControllerPhoneNumber.text = _currentRoastery.phoneNumber ?? '';
-      _textControllerDescription.text = _currentRoastery.description ?? '';
+      // _textControllerName.text = _currentRoastery.name ?? '';
+      // _textControllerAddress.text = _currentRoastery.address ?? '';
+      // _textControllerPhoneNumber.text = _currentRoastery.phoneNumber ?? '';
+      // _textControllerDescription.text = _currentRoastery.description ?? '';
 
       emit(_roasteryDataLoaded);
     });
@@ -92,23 +92,24 @@ class RoasteryBloc extends Bloc<RoasteryEvent, RoasteryState> {
         NavigationHelper.clearSnackBars();
         NavigationHelper.showSnackBar(const SnackBar(content: Text('Password masih kosong')));
         return;
-      } else if (_currentRoastery.name?.isEmpty ?? true) {
-        NavigationHelper.clearSnackBars();
-        NavigationHelper.showSnackBar(const SnackBar(content: Text('Nama masih kosong')));
-        return;
-      } else if (_currentRoastery.address?.isEmpty ?? true) {
-        NavigationHelper.clearSnackBars();
-        NavigationHelper.showSnackBar(const SnackBar(content: Text('Alamat masih kosong')));
-        return;
-      } else if (_currentRoastery.phoneNumber?.isEmpty ?? true) {
-        NavigationHelper.clearSnackBars();
-        NavigationHelper.showSnackBar(const SnackBar(content: Text('Nomor telepon masih kosong')));
-        return;
-      } else if (_currentRoastery.description?.isEmpty ?? true) {
-        NavigationHelper.clearSnackBars();
-        NavigationHelper.showSnackBar(const SnackBar(content: Text('Deskripsi masih kosong')));
-        return;
       }
+      // else if (_currentRoastery.name?.isEmpty ?? true) {
+      //   NavigationHelper.clearSnackBars();
+      //   NavigationHelper.showSnackBar(const SnackBar(content: Text('Nama masih kosong')));
+      //   return;
+      // } else if (_currentRoastery.address?.isEmpty ?? true) {
+      //   NavigationHelper.clearSnackBars();
+      //   NavigationHelper.showSnackBar(const SnackBar(content: Text('Alamat masih kosong')));
+      //   return;
+      // } else if (_currentRoastery.phoneNumber?.isEmpty ?? true) {
+      //   NavigationHelper.clearSnackBars();
+      //   NavigationHelper.showSnackBar(const SnackBar(content: Text('Nomor telepon masih kosong')));
+      //   return;
+      // } else if (_currentRoastery.description?.isEmpty ?? true) {
+      //   NavigationHelper.clearSnackBars();
+      //   NavigationHelper.showSnackBar(const SnackBar(content: Text('Deskripsi masih kosong')));
+      //   return;
+      // }
 
       showLoadingDialog();
 

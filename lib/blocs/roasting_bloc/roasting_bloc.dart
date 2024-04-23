@@ -46,33 +46,29 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
         _currentRoasting.unit = UnitType.celcius;
         _currentRoasting.timeElapsed = _stopwatch.elapsedMicroseconds / 1000;
 
-        MyApp.roastingResultBloc.add(
-          InitializeRoastingResultData(
-            roasting: kDebugMode
-                ? Roasting(
-                    roasteryId: currentUser?.id,
-                    orderId: _currentRoasting.orderId,
-                    unit: UnitType.celcius,
-                    timeElapsed: 110000,
-                  )
-                : _currentRoasting,
-            degrees: kDebugMode
-                ? List.generate(
-                    6,
-                    (index) => Degree(
-                      beanTemp: [90.0, 200.0, 180.0, 150.0, 186.0, 185.0][index],
-                      type: DegreeType.fromValue(index),
-                      timeElapsed: [0.0, 10000.0, 31000.0, 45000.0, 56000.0, 100000.0][index],
-                    ),
-                  )
-                : _degrees,
-          ),
-        );
-
         NavigationHelper.toReplacement(
           MaterialPageRoute(
             fullscreenDialog: true,
-            builder: (context) => const RoastingResultPage(),
+            builder: (context) => RoastingResultPage(
+              roasting: kDebugMode
+                  ? Roasting(
+                      roasteryId: currentUser?.id,
+                      orderId: _currentRoasting.orderId,
+                      unit: UnitType.celcius,
+                      timeElapsed: 110000,
+                    )
+                  : _currentRoasting,
+              degrees: kDebugMode
+                  ? List.generate(
+                      6,
+                      (index) => Degree(
+                        beanTemp: [90.0, 200.0, 180.0, 150.0, 186.0, 185.0][index],
+                        type: DegreeType.fromValue(index),
+                        timeElapsed: [0.0, 10000.0, 31000.0, 45000.0, 56000.0, 100000.0][index],
+                      ),
+                    )
+                  : _degrees,
+            ),
           ),
         );
       } else {

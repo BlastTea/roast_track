@@ -15,10 +15,12 @@ class InitializeRoastingResultData extends RoastingResultEvent {
   InitializeRoastingResultData({
     required this.roasting,
     required this.degrees,
+    this.classificationResults,
   });
 
   final Roasting roasting;
   final List<Degree> degrees;
+  final List<ClassificationRoastingResult>? classificationResults;
 }
 
 class SaveRoastingResultPressed extends RoastingResultEvent {}

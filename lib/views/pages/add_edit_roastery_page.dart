@@ -76,7 +76,8 @@ class _AddEditRoasteryPageState extends State<AddEditRoasteryPage> {
                     obscureText: !stateRoastery.isShowPassword,
                     maxLength: 100,
                     buildCounter: (context, {required currentLength, required isFocused, required maxLength}) => Container(),
-                    onEditingComplete: () => stateRoastery.focusNodeName.requestFocus(),
+                    // onEditingComplete: () => stateRoastery.focusNodeName.requestFocus(),
+                    onEditingComplete: () => MyApp.roasteryBloc.add(SaveRoasteryPressed()),
                     textInputAction: TextInputAction.next,
                   ),
                   Align(

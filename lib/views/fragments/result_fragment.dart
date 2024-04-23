@@ -98,6 +98,15 @@ class _ResultFragmentState extends State<ResultFragment> with SingleTickerProvid
                                             subtitle: Text('Tipe biji : ${order.beanType?.text ?? '?'}\nKota asal : ${order.fromDistrict ?? '?'}\nAlamat : ${order.address}\nJumlah : ${order.amount?.toThousandFormat() ?? '0'}\nTotal : Rp ${order.total?.toThousandFormat() ?? '0'}\n${order.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'}'),
                                             subtitleTextStyle: Theme.of(context).textTheme.bodyLarge,
                                             isThreeLine: true,
+                                            onTap: () => NavigationHelper.to(
+                                              MaterialPageRoute(
+                                                builder: (context) => RoastingResultPage.readOnly(
+                                                  roasting: order.roastings!.first,
+                                                  degrees: order.roastings!.first.degrees!,
+                                                  classificationResults: order.roastings!.first.classificationRoastingResults!,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                           const Divider(),
                                         ],
@@ -121,9 +130,14 @@ class _ResultFragmentState extends State<ResultFragment> with SingleTickerProvid
                                     itemBuilder: (context, index) {
                                       ClassificationResult result = stateResult.classificationResults[index];
 
-                                      return ListTile(
-                                        title: Text(result.resultLabel?.text ?? '?'),
-                                        subtitle: Text(result.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'),
+                                      return Column(
+                                        children: [
+                                          ListTile(
+                                            title: Text(result.resultLabel?.text ?? '?'),
+                                            subtitle: Text(result.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: true) ?? '?'),
+                                          ),
+                                          const Divider(),
+                                        ],
                                       );
                                     },
                                     itemCount: stateResult.classificationResults.length,

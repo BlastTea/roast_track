@@ -12,6 +12,8 @@ import 'package:roast_track/views/widgets/widgets.dart';
 part 'home_page.dart';
 part 'add_edit_order_page.dart';
 part 'add_edit_roastery_page.dart';
+part 'edit_profile_page.dart';
+part 'change_password_page.dart';
 
 part 'authentication/sign_in_page.dart';
 part 'authentication/sign_up_page.dart';

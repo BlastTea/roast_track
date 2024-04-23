@@ -23,13 +23,13 @@ class ProfileFragment extends StatelessWidget {
               ),
               title: Text(currentUser?.username ?? 'Guest'),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => showInformationDialog('Fitur ini masih belum tersedia'),
+              onTap: () => NavigationHelper.to(MaterialPageRoute(builder: (context) => const EditProfilePage())),
             ),
             const SizedBox(height: 32.0),
             ListTile(
               leading: const Icon(Icons.key),
               title: const Text('Ganti Password'),
-              onTap: () => showInformationDialog('Fitur ini masih belum tersedia'),
+              onTap: () => NavigationHelper.to(MaterialPageRoute(builder: (context) => const ChangePasswordPage())),
             ),
             const Divider(),
             ListTile(

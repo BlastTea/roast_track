@@ -51,6 +51,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       } catch (e) {
         _isInitializing = false;
         event.completer?.complete(false);
+        ApiHelper.handleError(e);
         emit(OrderError());
         return;
       }
