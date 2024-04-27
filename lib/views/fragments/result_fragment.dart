@@ -21,7 +21,38 @@ class _ResultFragmentState extends State<ResultFragment> with SingleTickerProvid
             return Scaffold(
               floatingActionButton: stateResult.tabController.index == 0
                   ? FloatingActionButton(
-                      onPressed: () {},
+                      onPressed: () => ExcelHelper.exportOrder(
+                        orders: stateResult.orders,
+                        dateTimeRange: stateResult.dateTimeRange,
+                      ).then((value) async {
+                        if (value != null) {
+                          NavigationHelper.clearSnackBars();
+                          NavigationHelper.showSnackBar(
+                            SnackBar(
+                              content: const Text('Data berhasil di export'),
+                              action: SnackBarAction(
+                                label: 'Buka',
+                                onPressed: () => OpenFile.open(value).then((value) {
+                                  switch (value.type) {
+                                    case ResultType.error:
+                                      showErrorDialog(value.message);
+                                    case ResultType.fileNotFound:
+                                      NavigationHelper.clearSnackBars();
+                                      NavigationHelper.showSnackBar(const SnackBar(content: Text('File tidak ditemukan')));
+                                    case ResultType.noAppToOpen:
+                                      NavigationHelper.clearSnackBars();
+                                      NavigationHelper.showSnackBar(const SnackBar(content: Text('Tidak ada aplikasi yang ditemukan untuk membuka file tersebut')));
+                                    case ResultType.permissionDenied:
+                                      NavigationHelper.clearSnackBars();
+                                      NavigationHelper.showSnackBar(const SnackBar(content: Text('Izin tidak diberikan')));
+                                    default:
+                                  }
+                                }),
+                              ),
+                            ),
+                          );
+                        }
+                      }),
                       child: const Icon(Icons.file_download),
                     )
                   : null,

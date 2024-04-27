@@ -1,12 +1,13 @@
 name: roast_track
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.0.1-1-pre-1
+version: 0.2.0-1-pre-3
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
 
 dependencies:
+  excel: ^4.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.5
@@ -17,7 +18,11 @@ dependencies:
   m_widget:
     git:
       url: https://github.com/BlastTea/MWidget.git
-      ref: 7bb423875cf7dbded45d23b9de866270f95351b5
+      ref: d652af58bd42cb12adfcfb92716bbde9ec77ca82
+  open_file_plus: ^3.4.1+1
+  path: ^1.9.0
+  path_provider: ^2.1.3
+  permission_handler: ^11.3.1
   shared_preferences: ^2.2.2
   syncfusion_flutter_charts: ^25.1.39+1
   tflite_flutter: ^0.10.4
