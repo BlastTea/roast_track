@@ -1079,7 +1079,9 @@ mixin _$Order {
   set fromDistrict(String? value) => throw _privateConstructorUsedError;
   int? get amount => throw _privateConstructorUsedError;
   set amount(int? value) => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parseDouble, toJson: _doubleToString)
   double? get total => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parseDouble, toJson: _doubleToString)
   set total(double? value) => throw _privateConstructorUsedError;
   OrderStatus? get status => throw _privateConstructorUsedError;
   set status(OrderStatus? value) => throw _privateConstructorUsedError;
@@ -1117,7 +1119,7 @@ abstract class $OrderCopyWith<$Res> {
       @JsonKey(name: 'bean_type') BeanType? beanType,
       @JsonKey(name: 'from_district') String? fromDistrict,
       int? amount,
-      double? total,
+      @JsonKey(fromJson: _parseDouble, toJson: _doubleToString) double? total,
       OrderStatus? status,
       User? user,
       Company? company,
@@ -1263,7 +1265,7 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       @JsonKey(name: 'bean_type') BeanType? beanType,
       @JsonKey(name: 'from_district') String? fromDistrict,
       int? amount,
-      double? total,
+      @JsonKey(fromJson: _parseDouble, toJson: _doubleToString) double? total,
       OrderStatus? status,
       User? user,
       Company? company,
@@ -1381,7 +1383,7 @@ class _$OrderImpl implements _Order {
       @JsonKey(name: 'bean_type') this.beanType,
       @JsonKey(name: 'from_district') this.fromDistrict,
       this.amount,
-      this.total,
+      @JsonKey(fromJson: _parseDouble, toJson: _doubleToString) this.total,
       this.status = OrderStatus.inProgress,
       this.user,
       this.company,
@@ -1414,6 +1416,7 @@ class _$OrderImpl implements _Order {
   @override
   int? amount;
   @override
+  @JsonKey(fromJson: _parseDouble, toJson: _doubleToString)
   double? total;
   @override
   @JsonKey()
@@ -1460,7 +1463,7 @@ abstract class _Order implements Order {
       @JsonKey(name: 'bean_type') BeanType? beanType,
       @JsonKey(name: 'from_district') String? fromDistrict,
       int? amount,
-      double? total,
+      @JsonKey(fromJson: _parseDouble, toJson: _doubleToString) double? total,
       OrderStatus? status,
       User? user,
       Company? company,
@@ -1505,7 +1508,9 @@ abstract class _Order implements Order {
   int? get amount;
   set amount(int? value);
   @override
+  @JsonKey(fromJson: _parseDouble, toJson: _doubleToString)
   double? get total;
+  @JsonKey(fromJson: _parseDouble, toJson: _doubleToString)
   set total(double? value);
   @override
   OrderStatus? get status;
@@ -1553,9 +1558,11 @@ mixin _$Roasting {
   set orderId(int? value) => throw _privateConstructorUsedError;
   UnitType? get unit => throw _privateConstructorUsedError;
   set unit(UnitType? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   double? get timeElapsed => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   set timeElapsed(double? value) => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
   set user(User? value) => throw _privateConstructorUsedError;
@@ -1595,7 +1602,9 @@ abstract class $RoastingCopyWith<$Res> {
       @JsonKey(name: 'roastery_id') int? roasteryId,
       @JsonKey(name: 'order_id') int? orderId,
       UnitType? unit,
-      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      double? timeElapsed,
       User? user,
       Order? order,
       List<Degree>? degrees,
@@ -1719,7 +1728,9 @@ abstract class _$$RoastingImplCopyWith<$Res>
       @JsonKey(name: 'roastery_id') int? roasteryId,
       @JsonKey(name: 'order_id') int? orderId,
       UnitType? unit,
-      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      double? timeElapsed,
       User? user,
       Order? order,
       List<Degree>? degrees,
@@ -1814,7 +1825,9 @@ class _$RoastingImpl implements _Roasting {
       @JsonKey(name: 'roastery_id') this.roasteryId,
       @JsonKey(name: 'order_id') this.orderId,
       this.unit,
-      @JsonKey(name: 'time_elapsed') this.timeElapsed,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      this.timeElapsed,
       this.user,
       this.order,
       this.degrees,
@@ -1837,7 +1850,8 @@ class _$RoastingImpl implements _Roasting {
   @override
   UnitType? unit;
   @override
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   double? timeElapsed;
   @override
   User? user;
@@ -1880,7 +1894,9 @@ abstract class _Roasting implements Roasting {
       @JsonKey(name: 'roastery_id') int? roasteryId,
       @JsonKey(name: 'order_id') int? orderId,
       UnitType? unit,
-      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      double? timeElapsed,
       User? user,
       Order? order,
       List<Degree>? degrees,
@@ -1909,9 +1925,11 @@ abstract class _Roasting implements Roasting {
   UnitType? get unit;
   set unit(UnitType? value);
   @override
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   double? get timeElapsed;
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   set timeElapsed(double? value);
   @override
   User? get user;
@@ -1957,17 +1975,27 @@ mixin _$Degree {
   set roastingId(int? value) => throw _privateConstructorUsedError;
   DegreeType? get type => throw _privateConstructorUsedError;
   set type(DegreeType? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'env_temp', includeIfNull: false)
+  @JsonKey(
+      name: 'env_temp',
+      includeIfNull: false,
+      fromJson: _parseDouble,
+      toJson: _doubleToString)
   double? get envTemp => throw _privateConstructorUsedError;
-  @JsonKey(name: 'env_temp', includeIfNull: false)
+  @JsonKey(
+      name: 'env_temp',
+      includeIfNull: false,
+      fromJson: _parseDouble,
+      toJson: _doubleToString)
   set envTemp(double? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bean_temp')
+  @JsonKey(name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
   double? get beanTemp => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bean_temp')
+  @JsonKey(name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
   set beanTemp(double? value) => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   double? get timeElapsed => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   set timeElapsed(double? value) => throw _privateConstructorUsedError;
   Roasting? get roasting => throw _privateConstructorUsedError;
   set roasting(Roasting? value) => throw _privateConstructorUsedError;
@@ -1994,9 +2022,18 @@ abstract class $DegreeCopyWith<$Res> {
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
       DegreeType? type,
-      @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
-      @JsonKey(name: 'bean_temp') double? beanTemp,
-      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(
+          name: 'env_temp',
+          includeIfNull: false,
+          fromJson: _parseDouble,
+          toJson: _doubleToString)
+      double? envTemp,
+      @JsonKey(
+          name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
+      double? beanTemp,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      double? timeElapsed,
       Roasting? roasting,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
@@ -2091,9 +2128,18 @@ abstract class _$$DegreeImplCopyWith<$Res> implements $DegreeCopyWith<$Res> {
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
       DegreeType? type,
-      @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
-      @JsonKey(name: 'bean_temp') double? beanTemp,
-      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(
+          name: 'env_temp',
+          includeIfNull: false,
+          fromJson: _parseDouble,
+          toJson: _doubleToString)
+      double? envTemp,
+      @JsonKey(
+          name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
+      double? beanTemp,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      double? timeElapsed,
       Roasting? roasting,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
@@ -2171,9 +2217,18 @@ class _$DegreeImpl implements _Degree {
       {this.id,
       @JsonKey(name: 'roasting_id') this.roastingId,
       this.type,
-      @JsonKey(name: 'env_temp', includeIfNull: false) this.envTemp,
-      @JsonKey(name: 'bean_temp') this.beanTemp,
-      @JsonKey(name: 'time_elapsed') this.timeElapsed,
+      @JsonKey(
+          name: 'env_temp',
+          includeIfNull: false,
+          fromJson: _parseDouble,
+          toJson: _doubleToString)
+      this.envTemp,
+      @JsonKey(
+          name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
+      this.beanTemp,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      this.timeElapsed,
       this.roasting,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
@@ -2189,13 +2244,18 @@ class _$DegreeImpl implements _Degree {
   @override
   DegreeType? type;
   @override
-  @JsonKey(name: 'env_temp', includeIfNull: false)
+  @JsonKey(
+      name: 'env_temp',
+      includeIfNull: false,
+      fromJson: _parseDouble,
+      toJson: _doubleToString)
   double? envTemp;
   @override
-  @JsonKey(name: 'bean_temp')
+  @JsonKey(name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
   double? beanTemp;
   @override
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   double? timeElapsed;
   @override
   Roasting? roasting;
@@ -2230,9 +2290,18 @@ abstract class _Degree implements Degree {
       {int? id,
       @JsonKey(name: 'roasting_id') int? roastingId,
       DegreeType? type,
-      @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
-      @JsonKey(name: 'bean_temp') double? beanTemp,
-      @JsonKey(name: 'time_elapsed') double? timeElapsed,
+      @JsonKey(
+          name: 'env_temp',
+          includeIfNull: false,
+          fromJson: _parseDouble,
+          toJson: _doubleToString)
+      double? envTemp,
+      @JsonKey(
+          name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
+      double? beanTemp,
+      @JsonKey(
+          name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
+      double? timeElapsed,
       Roasting? roasting,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt}) = _$DegreeImpl;
@@ -2251,19 +2320,29 @@ abstract class _Degree implements Degree {
   DegreeType? get type;
   set type(DegreeType? value);
   @override
-  @JsonKey(name: 'env_temp', includeIfNull: false)
+  @JsonKey(
+      name: 'env_temp',
+      includeIfNull: false,
+      fromJson: _parseDouble,
+      toJson: _doubleToString)
   double? get envTemp;
-  @JsonKey(name: 'env_temp', includeIfNull: false)
+  @JsonKey(
+      name: 'env_temp',
+      includeIfNull: false,
+      fromJson: _parseDouble,
+      toJson: _doubleToString)
   set envTemp(double? value);
   @override
-  @JsonKey(name: 'bean_temp')
+  @JsonKey(name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
   double? get beanTemp;
-  @JsonKey(name: 'bean_temp')
+  @JsonKey(name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString)
   set beanTemp(double? value);
   @override
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   double? get timeElapsed;
-  @JsonKey(name: 'time_elapsed')
+  @JsonKey(
+      name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString)
   set timeElapsed(double? value);
   @override
   Roasting? get roasting;

@@ -23,9 +23,11 @@ class RoastingResultBloc extends Bloc<RoastingResultEvent, RoastingResultState> 
       showLoadingDialog();
 
       try {
+        Map<String, dynamic> body = _roasting.toJson()..addAll({'degrees': _degrees.map((e) => e.toJson()).toList()});
+
         _roasting = await ApiHelper.post(
           '/api/v1/roastings',
-          body: _roasting.copyWith(degrees: _degrees).toJson(),
+          body: body,
         ).then((value) => Roasting.fromJson(value['data']));
 
         _degrees = List.from(_roasting.degrees!);

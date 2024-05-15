@@ -137,7 +137,7 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       beanType: $enumDecodeNullable(_$BeanTypeEnumMap, json['bean_type']),
       fromDistrict: json['from_district'] as String?,
       amount: json['amount'] as int?,
-      total: (json['total'] as num?)?.toDouble(),
+      total: _parseDouble(json['total']),
       status: $enumDecodeNullable(_$OrderStatusEnumMap, json['status']) ??
           OrderStatus.inProgress,
       user: json['user'] == null
@@ -167,7 +167,7 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'bean_type': _$BeanTypeEnumMap[instance.beanType],
       'from_district': instance.fromDistrict,
       'amount': instance.amount,
-      'total': instance.total,
+      'total': _doubleToString(instance.total),
       'status': _$OrderStatusEnumMap[instance.status],
       'user': instance.user,
       'company': instance.company,
@@ -193,7 +193,7 @@ _$RoastingImpl _$$RoastingImplFromJson(Map<String, dynamic> json) =>
       roasteryId: json['roastery_id'] as int?,
       orderId: json['order_id'] as int?,
       unit: $enumDecodeNullable(_$UnitTypeEnumMap, json['unit']),
-      timeElapsed: (json['time_elapsed'] as num?)?.toDouble(),
+      timeElapsed: _parseDouble(json['time_elapsed']),
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
@@ -222,7 +222,7 @@ Map<String, dynamic> _$$RoastingImplToJson(_$RoastingImpl instance) =>
       'roastery_id': instance.roasteryId,
       'order_id': instance.orderId,
       'unit': _$UnitTypeEnumMap[instance.unit],
-      'time_elapsed': instance.timeElapsed,
+      'time_elapsed': _doubleToString(instance.timeElapsed),
       'user': instance.user,
       'order': instance.order,
       'degrees': instance.degrees,
@@ -240,9 +240,9 @@ _$DegreeImpl _$$DegreeImplFromJson(Map<String, dynamic> json) => _$DegreeImpl(
       id: json['id'] as int?,
       roastingId: json['roasting_id'] as int?,
       type: $enumDecodeNullable(_$DegreeTypeEnumMap, json['type']),
-      envTemp: (json['env_temp'] as num?)?.toDouble(),
-      beanTemp: (json['bean_temp'] as num?)?.toDouble(),
-      timeElapsed: (json['time_elapsed'] as num?)?.toDouble(),
+      envTemp: _parseDouble(json['env_temp']),
+      beanTemp: _parseDouble(json['bean_temp']),
+      timeElapsed: _parseDouble(json['time_elapsed']),
       roasting: json['roasting'] == null
           ? null
           : Roasting.fromJson(json['roasting'] as Map<String, dynamic>),
@@ -267,9 +267,9 @@ Map<String, dynamic> _$$DegreeImplToJson(_$DegreeImpl instance) {
     }
   }
 
-  writeNotNull('env_temp', instance.envTemp);
-  val['bean_temp'] = instance.beanTemp;
-  val['time_elapsed'] = instance.timeElapsed;
+  writeNotNull('env_temp', _doubleToString(instance.envTemp));
+  val['bean_temp'] = _doubleToString(instance.beanTemp);
+  val['time_elapsed'] = _doubleToString(instance.timeElapsed);
   val['roasting'] = instance.roasting;
   val['created_at'] = instance.createdAt?.toIso8601String();
   val['updated_at'] = instance.updatedAt?.toIso8601String();

@@ -59,6 +59,9 @@ class RoastingChartPainter extends CustomPainter {
       for (Degree degree in degreeData!) {
         highestDegree = max(highestDegree, degree.beanTemp ?? 0.0);
       }
+      for (Degree degree in degreeData!) {
+        highestDegree = max(highestDegree, degree.envTemp ?? 0.0);
+      }
     }
 
     // Paint for grid and label
@@ -116,6 +119,26 @@ class RoastingChartPainter extends CustomPainter {
       for (var degree in degreeData!) {
         var x = (degree.timeElapsed!.toDouble() / 60000) / currentTimeInMinutes * size.width;
         var y = (degree.beanTemp! / highestDegree) * size.height;
+        if (first) {
+          path.moveTo(x, size.height - y);
+          first = false;
+        }
+        path.lineTo(x, size.height - y);
+      }
+
+      canvas.drawPath(path, pathPaint);
+
+      pathPaint = Paint()
+        ..color = colorScheme.inversePrimary
+        ..strokeWidth = 2
+        ..style = PaintingStyle.stroke;
+      path = Path();
+
+      // Iterates through the remaining data, with conversion of timeElapsed to minutes
+      first = true;
+      for (var degree in degreeData!) {
+        var x = (degree.timeElapsed!.toDouble() / 60000) / currentTimeInMinutes * size.width;
+        var y = ((degree.envTemp ?? 0.0) / highestDegree) * size.height;
         if (first) {
           path.moveTo(x, size.height - y);
           first = false;

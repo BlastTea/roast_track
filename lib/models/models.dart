@@ -10,6 +10,16 @@ List<dynamic>? _jsonFromString(dynamic data) => data == '' ? null : json.decode(
 
 String? _jsonToString(dynamic json) => json.toString();
 
+double? _parseDouble(dynamic value) => value is String
+    ? double.tryParse(value)
+    : value is double
+        ? value
+        : value is int
+            ? value.toDouble()
+            : null;
+
+String? _doubleToString(double? value) => value?.toStringAsFixed(2);
+
 @unfreezed
 class User with _$User {
   factory User({
@@ -74,7 +84,7 @@ class Order with _$Order {
     @JsonKey(name: 'bean_type') BeanType? beanType,
     @JsonKey(name: 'from_district') String? fromDistrict,
     int? amount,
-    double? total,
+    @JsonKey(fromJson: _parseDouble, toJson: _doubleToString) double? total,
     @Default(OrderStatus.inProgress) OrderStatus? status,
     User? user,
     Company? company,
@@ -93,7 +103,7 @@ class Roasting with _$Roasting {
     @JsonKey(name: 'roastery_id') int? roasteryId,
     @JsonKey(name: 'order_id') int? orderId,
     UnitType? unit,
-    @JsonKey(name: 'time_elapsed') double? timeElapsed,
+    @JsonKey(name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString) double? timeElapsed,
     User? user,
     Order? order,
     List<Degree>? degrees,
@@ -111,9 +121,9 @@ class Degree with _$Degree {
     int? id,
     @JsonKey(name: 'roasting_id') int? roastingId,
     DegreeType? type,
-    @JsonKey(name: 'env_temp', includeIfNull: false) double? envTemp,
-    @JsonKey(name: 'bean_temp') double? beanTemp,
-    @JsonKey(name: 'time_elapsed') double? timeElapsed,
+    @JsonKey(name: 'env_temp', includeIfNull: false, fromJson: _parseDouble, toJson: _doubleToString) double? envTemp,
+    @JsonKey(name: 'bean_temp', fromJson: _parseDouble, toJson: _doubleToString) double? beanTemp,
+    @JsonKey(name: 'time_elapsed', fromJson: _parseDouble, toJson: _doubleToString) double? timeElapsed,
     Roasting? roasting,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,

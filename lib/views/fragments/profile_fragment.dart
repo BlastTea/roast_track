@@ -36,6 +36,25 @@ class ProfileFragment extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
               onTap: () async {
+                bool? result = await NavigationHelper.showDialog(
+                  builder: (context) => AlertDialog(
+                    title: const Text('Logout dari aplikasi?'),
+                    titleTextStyle: MWidgetTheme.of(context)?.dialogTheme.titleTextStyle,
+                    actions: [
+                      TextButton(
+                        onPressed: () => NavigationHelper.back(false),
+                        child: const Text('Batal'),
+                      ),
+                      FilledButton(
+                        onPressed: () => NavigationHelper.back(true),
+                        child: const Text('Logout'),
+                      ),
+                    ],
+                  ),
+                );
+
+                if (!(result ?? false)) return;
+
                 await ApiHelper.signOut();
                 NavigationHelper.toReplacement(MaterialPageRoute(builder: (context) => const SignInPage()));
                 await Future.delayed(Durations.medium3);

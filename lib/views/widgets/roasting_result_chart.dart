@@ -36,6 +36,11 @@ class RoastingResultChart extends StatelessWidget {
             xValueMapper: (datum, index) => datum.timeElapsed! / 1000,
             yValueMapper: (datum, index) => datum.beanTemp,
           ),
+          LineSeries<Degree, double>(
+            dataSource: degrees,
+            xValueMapper: (datum, index) => datum.timeElapsed! / 1000,
+            yValueMapper: (datum, index) => datum.envTemp,
+          ),
         ],
       );
 }

@@ -46,7 +46,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       try {
         _orders = await ApiHelper.get(
           '/api/v1/orders',
-          body: kDebugMode ? null : {'status': 'in_progress'},
+          body: {'status': 'in_progress'},
         ).then((value) => (value['data'] as List).map((e) => Order.fromJson(e)).toList());
       } catch (e) {
         _isInitializing = false;

@@ -50,24 +50,8 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
           MaterialPageRoute(
             fullscreenDialog: true,
             builder: (context) => RoastingResultPage(
-              roasting: kDebugMode
-                  ? Roasting(
-                      roasteryId: currentUser?.id,
-                      orderId: _currentRoasting.orderId,
-                      unit: UnitType.celcius,
-                      timeElapsed: 110000,
-                    )
-                  : _currentRoasting,
-              degrees: kDebugMode
-                  ? List.generate(
-                      6,
-                      (index) => Degree(
-                        beanTemp: [90.0, 200.0, 180.0, 150.0, 186.0, 185.0][index],
-                        type: DegreeType.fromValue(index),
-                        timeElapsed: [0.0, 10000.0, 31000.0, 45000.0, 56000.0, 100000.0][index],
-                      ),
-                    )
-                  : _degrees,
+              roasting: _currentRoasting,
+              degrees: _degrees,
             ),
           ),
         );
@@ -79,26 +63,35 @@ class RoastingBloc extends Bloc<RoastingEvent, RoastingState> {
     });
 
     on<RoastingButtonPressed>((event, emit) async {
-      double? bt = await NavigationHelper.showModalBottomSheet(
-        builder: (context) => const InputSheet.number(
+      (String, String)? result = await NavigationHelper.showModalBottomSheet(
+        builder: (context) => const InputSheet.doubleNumber(
           decoration: InputDecoration(
+            labelText: 'ET',
+          ),
+          secondaryDecoration: InputDecoration(
             labelText: 'BT',
           ),
         ),
-      ).then((value) => value != null ? double.tryParse(value) : null);
+      );
 
-      if (bt == null) return;
+      if (result == null) return;
 
       _takeIf(event.type);
       _degrees.add(
         Degree(
-          beanTemp: bt,
+          envTemp: double.tryParse(result.$1) ?? 0.0,
+          beanTemp: double.tryParse(result.$2) ?? 0.0,
           timeElapsed: event.type == DegreeType.charge ? 0 : _stopwatch.elapsedMicroseconds / 1000,
           type: event.type,
         ),
       );
 
       if (event.type == DegreeType.charge) _stopwatch.reset();
+
+      if (!_stopwatch.isRunning) {
+        _stopwatch.start();
+        _currentTimer = Timer.periodic(Durations.extralong4, (timer) => add(SetRoastingState()));
+      }
 
       _lastDegree = DegreeType.fromValue(event.type.value + 1);
 

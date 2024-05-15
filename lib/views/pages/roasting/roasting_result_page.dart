@@ -106,8 +106,8 @@ class _RoastingResultPageState extends State<RoastingResultPage> {
                                       Expanded(
                                         child: FilledButton.tonal(
                                           onPressed: [
-                                            stateRoastingResult.roasting.id != null && !kDebugMode ? null : () => MyApp.roastingResultBloc.add(SaveRoastingResultPressed()),
-                                            stateRoastingResult.roasting.id == null && !kDebugMode ? null : () => MyApp.roastingResultBloc.add(TakeRoastingResultPicturePressed()),
+                                            stateRoastingResult.roasting.id != null ? null : () => MyApp.roastingResultBloc.add(SaveRoastingResultPressed()),
+                                            stateRoastingResult.roasting.id == null ? null : () => MyApp.roastingResultBloc.add(TakeRoastingResultPicturePressed()),
                                           ][index],
                                           child: Text(['Simpan', 'Ambil gambar'][index]),
                                         ),
