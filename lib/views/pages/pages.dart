@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +19,8 @@ part 'change_password_page.dart';
 
 part 'authentication/sign_in_page.dart';
 part 'authentication/sign_up_page.dart';
+
+part 'company/company_page.dart';
 
 part 'roasting/roasting_page.dart';
 part 'roasting/roasting_result_page.dart';

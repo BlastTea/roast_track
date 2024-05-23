@@ -126,6 +126,7 @@ class ApiHelper {
     String token = response['token'];
 
     currentUser = User.fromJson(response['user']);
+    MyApp.companyBloc.add(InitializeCompanyData());
 
     SharedPreferences sharedPref = await SharedPreferences.getInstance();
 
@@ -168,6 +169,7 @@ class ApiHelper {
     if (sharedPref.getString(_keyToken) == null) return false;
 
     currentUser = User.fromJson(jsonDecode(sharedPref.getString(_keyCurrentUser)!));
+    MyApp.companyBloc.add(InitializeCompanyData());
 
     return true;
   }

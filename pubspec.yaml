@@ -1,7 +1,7 @@
 name: roast_track
 description: "A new Flutter project."
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.1.0+2
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
@@ -18,7 +18,7 @@ dependencies:
   m_widget:
     git:
       url: https://github.com/BlastTea/MWidget.git
-      ref: d652af58bd42cb12adfcfb92716bbde9ec77ca82
+      ref: 19376662ee215e49446bc66d8965c86f12e26c41
   open_file_plus: ^3.4.1+1
   path: ^1.9.0
   path_provider: ^2.1.3

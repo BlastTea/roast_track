@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   static AuthenticationBloc authenticationBloc = AuthenticationBloc();
+  static CompanyBloc companyBloc = CompanyBloc();
   static HomeBloc homeBloc = HomeBloc();
   static OrderBloc orderBloc = OrderBloc();
   static RoastingBloc roastingBloc = RoastingBloc();
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => authenticationBloc),
+              BlocProvider(create: (context) => companyBloc),
               BlocProvider(create: (context) => homeBloc),
               BlocProvider(create: (context) => orderBloc),
               BlocProvider(create: (context) => roastingBloc),
@@ -123,7 +125,7 @@ class MyApp extends StatelessWidget {
               title: appName,
               navigatorKey: navigatorKey,
               scaffoldMessengerKey: scaffoldMessengerKey,
-              home: currentUser != null ? const HomePage() : const SignInPage(),
+              home: currentUser != null ? const CompanyPage.select() : const SignInPage(),
             ),
           ),
         ),
