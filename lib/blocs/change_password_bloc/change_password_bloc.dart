@@ -51,7 +51,7 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
       } catch (e) {
         NavigationHelper.back();
 
-        if (e is Map && e['message'] != null && e['message'] == 'Old password is wrong') {
+        if (e is Map && e['data']['message'] != null && e['data']['message'] == 'Old password is wrong') {
           _isOldPasswordMatch = false;
           emit(_changePasswordDataLoaded);
         }

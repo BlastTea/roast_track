@@ -31,18 +31,26 @@ class ApiHelper {
     SharedPreferences sharedPref = await SharedPreferences.getInstance();
     String? token = sharedPref.getString(_keyToken);
 
-    if (token == null) throw 'Session is expired';
+    if (token == null) {
+      throw {
+        'data': {
+          'message': 'Unauthenticated.',
+        },
+        'status_code': 401,
+      };
+    }
 
     return token;
   }
 
   static http.StreamedResponse _onRequestTimeout() => http.StreamedResponse(
-      Stream.fromIterable(
-        [
-          json.encode({'message': 'Request Timeout'}).codeUnits,
-        ],
-      ),
-      408);
+        Stream.fromIterable(
+          [
+            json.encode({'message': 'Request Timeout'}).codeUnits,
+          ],
+        ),
+        408,
+      );
 
   static Future<dynamic> _request({
     required String method,
@@ -71,9 +79,12 @@ class ApiHelper {
 
     debugPrint('(http response) : $method ${request.url} ${response.statusCode} ${request.headers} $body => $responseString');
 
-    if (!(response.statusCode > 199 && response.statusCode < 300) && (responseString.contains('<!doctype html>') || responseString.contains('<!DOCTYPE html>'))) throw responseString;
-
-    if (!(response.statusCode > 199 && response.statusCode < 300)) throw json.decode(responseString);
+    if (!(response.statusCode > 199 && response.statusCode < 300)) {
+      throw {
+        'data': json.decode(responseString),
+        'status_code': response.statusCode,
+      };
+    }
 
     if (!decode) return responseString;
 
@@ -105,7 +116,12 @@ class ApiHelper {
 
     debugPrint('(http response) : $method ${request.url} ${response.statusCode} ${request.headers} $fields => $responseString');
 
-    if (!(response.statusCode > 199 && response.statusCode < 300)) throw json.decode(responseString);
+    if (!(response.statusCode > 199 && response.statusCode < 300)) {
+      throw {
+        'data': json.decode(responseString),
+        'status_code': response.statusCode,
+      };
+    }
 
     return json.decode(responseString);
   }
@@ -189,7 +205,7 @@ class ApiHelper {
   static Future<dynamic> delete(String path, {Map<String, dynamic>? body, bool ignoreAuthorization = false}) => _request(method: 'DELETE', uri: Uri.parse('$url$path'), body: body, ignoreAuthorization: ignoreAuthorization);
 
   static Future<void> handleError(Object e) async {
-    if (e is String && e == 'Session is expired') {
+    if (e is Map && e['status_code'] == 401) {
       while (NavigationHelper.canGoBack()) {
         NavigationHelper.back();
       }
@@ -197,7 +213,7 @@ class ApiHelper {
       return await showInformationDialog('Sesi Anda telah berakhir');
     }
 
-    if (e is Map && e['message'] != null) return showErrorDialog(e['message'].toString());
+    if (e is Map && e['data'] is Map && e['data']['message'] != null) return showErrorDialog(e['data']['message'].toString());
 
     if (e is FormatException) return showErrorDialog(e.source);
 

@@ -70,7 +70,7 @@ class _InputSheetState extends State<InputSheet> {
                     controller: _textController,
                     autofocus: true,
                     decoration: widget.decoration,
-                    inputFormatters: [_InputSheetType.number, _InputSheetType.doubleNumber].contains(widget.type) ? [textFormatterDigitsOnly] : null,
+                    inputFormatters: [_InputSheetType.number, _InputSheetType.doubleNumber].contains(widget.type) ? [FilteringTextInputFormatter.allow(RegExp(r'^[1-9]\d{0,2}$|^1000$'))] : null,
                     keyboardType: [_InputSheetType.number, _InputSheetType.doubleNumber].contains(widget.type) ? TextInputType.number : null,
                     onEditingComplete: widget.type == _InputSheetType.doubleNumber ? null : () => NavigationHelper.back(_textController.text.trim()),
                     textInputAction: widget.type == _InputSheetType.doubleNumber ? TextInputAction.next : null,
@@ -80,7 +80,7 @@ class _InputSheetState extends State<InputSheet> {
                     TextField(
                       controller: _textControllerSecondary,
                       decoration: widget.secondaryDecoration,
-                      inputFormatters: [_InputSheetType.number, _InputSheetType.doubleNumber].contains(widget.type) ? [textFormatterDigitsOnly] : null,
+                      inputFormatters: [_InputSheetType.number, _InputSheetType.doubleNumber].contains(widget.type) ? [FilteringTextInputFormatter.allow(RegExp(r'^[1-9]\d{0,2}$|^1000$'))] : null,
                       keyboardType: [_InputSheetType.number, _InputSheetType.doubleNumber].contains(widget.type) ? TextInputType.number : null,
                       onEditingComplete: () => NavigationHelper.back((_textController.text.trim(), _textControllerSecondary.text.trim())),
                     ),

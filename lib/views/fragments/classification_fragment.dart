@@ -16,6 +16,7 @@ class ClassificationFragment extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ImageContainer.hero(
+                      key: UniqueKey(),
                       tag: 'Classification image',
                       borderRadius: const BorderRadius.vertical(bottom: Radius.circular(kShapeExtraLarge)),
                       image: stateClassification.currentImageData != null ? MemoryImage(stateClassification.currentImageData!) : null,
