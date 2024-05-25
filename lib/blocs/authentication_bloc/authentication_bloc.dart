@@ -15,13 +15,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     });
 
     on<SignInPressed>((event, emit) async {
-      if (_textControllerUsernameSignIn.text.trim().isEmpty) {
+      if (_textControllerUsernameSignIn.text.trim().isEmpty || _textControllerPasswordSignIn.text.trim().isEmpty) {
         NavigationHelper.clearSnackBars();
-        NavigationHelper.showSnackBar(const SnackBar(content: Text('Username masih kosong')));
-        return;
-      } else if (_textControllerPasswordSignIn.text.trim().isEmpty) {
-        NavigationHelper.clearSnackBars();
-        NavigationHelper.showSnackBar(const SnackBar(content: Text('Password masih kosong')));
+        NavigationHelper.showSnackBar(const SnackBar(content: Text('Username dan password tidak boleh kosong')));
         return;
       }
 

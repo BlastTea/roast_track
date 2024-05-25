@@ -210,7 +210,10 @@ class ApiHelper {
         NavigationHelper.back();
       }
       NavigationHelper.toReplacement(MaterialPageRoute(builder: (context) => const SignInPage()));
-      return await showInformationDialog('Sesi Anda telah berakhir');
+
+      if (e['data'] is Map && e['data']['message'] == 'Username or password is wrong') return showInformationDialog('Username atau password salah');
+
+      return showInformationDialog('Sesi Anda telah berakhir');
     }
 
     if (e is Map && e['data'] is Map && e['data']['message'] != null) return showErrorDialog(e['data']['message'].toString());
